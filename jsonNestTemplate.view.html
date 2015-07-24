@@ -1,0 +1,19 @@
+<button class="btn btn-default btn-xs col-xs-1 json-delete" ng-click="deleteProperty(key, parent)">&times;</button>
+<label ng-hide="isArray(parent)" class="col-xs-4 json-form-element">
+  {{key}}:
+  <span ng-show="isNested(value) && isArray(value)">[</span>
+  <span ng-show="isNested(value) && !isArray(value)">{</span>
+</label>
+<label ng-show="isNested(value) && !isArray(value)  && isArray(parent)" class="col-xs-11 json-form-element">{</label>
+<div ng-if="isNested(value)" class="nested-json col-xs-12">
+  <div ng-repeat="(key, value) in parent[key] track by key" ng-init="parent = child; child = value" class="col-xs-12 json-form-row" ng-include="'app/authoring/jsonEditor/jsonNestTemplate.view.html'">
+  </div>
+</div>
+<div ng-if="!isNested(value)" class="col-xs-7 json-form-element">
+  <input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="form-control col-xs-12 json-input" required>
+</div>
+
+<div json-editor-add-property object="value" newProperty="{}" class="col-xs-12 row" ng-show="isNested(value)">
+</div>
+
+<label ng-show="isNested(value)" class="col-xs-3 json-form-element">{{isArray(value) ? ']' : '}'}}</label>

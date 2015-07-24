@@ -1,0 +1,17 @@
+<div class="json-container col-xs-12">
+  <div class="json-form-div col-xs-6">
+    <form class="form-horizontal col-xs-12" name="interactiveConfigForm" ng-submit="" role="form">
+      <label class="col-xs-12 json-brackets">{</label>
+      <div ng-repeat="(key, value) in config track by key" ng-init="parent = config; child = value" class="col-xs-12 row json-form" ng-include="'app/authoring/jsonEditor/jsonNestTemplate.view.html'">
+      </div>
+      <div json-editor-add-property object="config" newProperty="{}" class="col-xs-12 row">
+      </div>
+      <label class="col-xs-12 json-brackets">}</label>
+    </form>
+  </div>
+  <json-formatter json="config" open="4" class="col-xs-6 json-display"></json-formatter>
+</div>
+<div class="close-modal col-xs-12">
+  <button class="btn btn-default btn-sm col-xs-3 col-xs-offset-3" ng-click="saveInteractive()">Save</button>
+  <button class="btn btn-default btn-sm col-xs-3" ng-click="closeModal()">Cancel</button>
+</div>
