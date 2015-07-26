@@ -16,9 +16,9 @@ describe('jsonEditorAddProperty', function() {
   describe('addProperty', function() {
     describe('when scope.object is an object', function() {
       beforeEach(function() {
-        bard.appModule('app');
+        bard.appModule('angular-json-editor');
 
-        bard.inject(function($window, $rootScope, $compile, $q, authoringFactory) {
+        bard.inject(function($window, $rootScope, $compile) {
           testScope = $rootScope;
           elm = angular.element('<json-editor-add-property object="newConfig" newProperty="{}">');
 
@@ -69,9 +69,9 @@ describe('jsonEditorAddProperty', function() {
 
     describe('when scope.object is an array', function() {
       beforeEach(function() {
-        bard.appModule('app');
+        bard.appModule('angular-json-editor');
 
-        bard.inject(function($window, $rootScope, $compile, $q, authoringFactory) {
+        bard.inject(function($window, $rootScope, $compile) {
           testScope = $rootScope;
           elm = angular.element('<json-editor-add-property object="newConfig" newProperty="{}">');
 

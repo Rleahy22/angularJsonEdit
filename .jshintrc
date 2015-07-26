@@ -1,0 +1,17 @@
+{
+    "camelcase": true,
+    "indent": 2,
+    "latedef": false,
+    "globalstrict": true,
+    "undef": true,
+    "unused": true,
+    "globals": {
+        "angular": true,
+        "bard": true,
+        "beforeEach": true,
+        "describe": true,
+        "expect": true,
+        "it": true,
+        "module": true
+    }
+}

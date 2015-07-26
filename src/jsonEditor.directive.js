@@ -1,17 +1,15 @@
 (function() {
   'use strict';
 
-  angular.module('app')
+  angular.module('angular-json-editor')
   .directive('jsonEditor', jsonEditor);
 
   jsonEditor.$inject = ['$http', '$compile'];
-  jsonEditor.$inject = ['$http', '$compile', '$log'];
 
   function jsonEditor($http, $compile) {
-  function jsonEditor($http, $compile, $log) {
     var directive = {
       link: link,
-      templateUrl: 'app/authoring/jsonEditor/jsonEditor.view.html',
+      templateUrl: 'src/jsonEditor.view.html',
       restrict: 'EA',
       scope: {
         config: '=',
@@ -23,18 +21,10 @@
     return directive;
 
     function link(scope, element) {
-      scope.closeModal     = closeModal;
       scope.deleteProperty = deleteProperty;
       scope.getInputType   = getInputType;
       scope.isArray        = isArray;
       scope.isNested       = isNested;
-      scope.saveConfig     = saveConfig;
-
-      function closeModal() {
-        scope.savedConfig = JSON.stringify(scope.savedConfig);
-        scope.config = scope.savedConfig;
-        scope.showModal = false;
-      }
 
       function deleteProperty(key, object) {
         if (scope.isArray(object)) {
@@ -42,7 +32,8 @@
         } else {
           delete object[key];
         }
-        $http.get('app/authoring/jsonEditor/jsonEditor.view.html')
+
+        $http.get('src/jsonEditor.view.html')
         .then(function(response) {
           element.html($compile(response.data)(scope));
         });
@@ -68,9 +59,6 @@
         }
       }
 
-      function saveConfig() {
-        scope.showModal = false;
-      }
       scope.$watch('showModal', function(newVal) {
         if (newVal === true) {
           scope.savedConfig = angular.merge({}, scope.config);

@@ -1,13 +1,13 @@
 (function() {
   'use strict';
 
-  angular.module('app')
+  angular.module('angular-json-editor')
   .directive('jsonEditorAddProperty', jsonEditorAddProperty);
 
   function jsonEditorAddProperty() {
     var directive = {
       link: link,
-      templateUrl: 'app/authoring/jsonEditor/jsonEditorAddProperty.view.html',
+      templateUrl: 'src/jsonEditorAddProperty.view.html',
       restrict: 'EA',
       scope: {
         object: '=',

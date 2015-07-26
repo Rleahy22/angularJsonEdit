@@ -25,9 +25,9 @@ describe('jsonEditor', function() {
   var testScope;
 
   beforeEach(function() {
-    bard.appModule('app');
+    bard.appModule('angular-json-editor');
 
-    bard.inject(function($window, $rootScope, $compile, $q, authoringFactory) {
+    bard.inject(function($window, $rootScope, $compile) {
       testScope = $rootScope;
       elm = angular.element('<json-editor config="newConfig" show-modal="true">');
 
@@ -36,21 +36,6 @@ describe('jsonEditor', function() {
       $compile(elm)(testScope);
       testScope.$digest();
       isolateScope = elm.isolateScope();
-    });
-  });
-
-  describe('closeModal', function() {
-    it('should replace changes made with original config', function() {
-      expect(isolateScope.config.id).toEqual(1);
-      expect(isolateScope.savedConfig.id).toEqual(1);
-
-      isolateScope.config.id = 2;
-      isolateScope.closeModal();
-
-      var parsedConfig = JSON.parse(isolateScope.config);
-
-      expect(parsedConfig.id).toEqual(1);
-      expect(isolateScope.showModal).toEqual(false);
     });
   });
 
