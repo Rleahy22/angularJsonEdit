@@ -4,9 +4,9 @@
   angular.module('angular-json-editor')
   .directive('jsonEditor', jsonEditor);
 
-  jsonEditor.$inject = ['$http', '$compile'];
+  jsonEditor.$inject = ['$compile'];
 
-  function jsonEditor($http, $compile) {
+  function jsonEditor($compile) {
     var template = '<div class="json-container">' +
       '<div class="json-form-div">' +
         '<form name="interactiveConfigForm" ng-submit="" role="form">' +
