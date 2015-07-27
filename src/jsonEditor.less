@@ -1,5 +1,5 @@
 .json-container {
-  height: 90%;
+  height: 100%;
   overflow-y: scroll;
 
   .json-form-div {
@@ -7,9 +7,12 @@
     overflow-y: scroll;
 
     .json-form {
+      width: 100%;
+      display: inline-block;
 
       .json-form-element {
-        padding: 0 10px 0 3px;
+        display: inline-block;
+        padding: 5px 10px 0 3px;
 
         .json-input {
           height: 25px;
@@ -20,6 +23,7 @@
 
       .json-form-row {
         padding-top: 5px;
+        padding-left: 10px;
       }
 
       .nested-json {

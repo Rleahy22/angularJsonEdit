@@ -9,7 +9,7 @@
   function jsonEditor($compile) {
     var template = '<div class="json-container">' +
       '<div class="json-form-div">' +
-        '<form name="interactiveConfigForm" ng-submit="" role="form">' +
+        '<form name="jsonEditorForm" ng-submit="" role="form">' +
           '<label class="json-brackets">{</label>' +
           '<div ng-repeat="(key, value) in config track by key" ng-init="parent = config; child = value" class="json-form" ng-include="\'../src/jsonNestTemplate.view.html\'">' +
           '</div>' +
