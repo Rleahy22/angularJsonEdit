@@ -1,0 +1,23 @@
+{
+  "name": "angular-json-editor",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Rleahy22/angularJsonEditor",
+  "authors": [
+    "rleahy22 <ryanleahy90@gmail.com>"
+  ],
+  "description": "Infinitely nesting, dependency free JSON editor for Angular",
+  "main": "src/app.module.js",
+  "keywords": [
+    "Angular",
+    "JSON",
+    "editor",
+    "nesting"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "**/*.spec.js"
+  ]
+}
