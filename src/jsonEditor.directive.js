@@ -7,13 +7,25 @@
   jsonEditor.$inject = ['$http', '$compile'];
 
   function jsonEditor($http, $compile) {
+    var template = '<div class="json-container">' +
+      '<div class="json-form-div">' +
+        '<form name="interactiveConfigForm" ng-submit="" role="form">' +
+          '<label class="json-brackets">{</label>' +
+          '<div ng-repeat="(key, value) in config track by key" ng-init="parent = config; child = value" class="json-form" ng-include="\'../src/jsonNestTemplate.view.html\'">' +
+          '</div>' +
+          '<div json-editor-add-property object="config" newProperty="{}">' +
+          '</div>' +
+          '<label class="json-brackets">}</label>' +
+        '</form>' +
+      '</div>' +
+    '</div>';
+
     var directive = {
       link: link,
-      templateUrl: 'src/jsonEditor.view.html',
+      template: template,
       restrict: 'EA',
       scope: {
         config: '=',
-        saveInteractive: '&',
         showModal: '='
       }
     };
@@ -33,10 +45,7 @@
           delete object[key];
         }
 
-        $http.get('src/jsonEditor.view.html')
-        .then(function(response) {
-          element.html($compile(response.data)(scope));
-        });
+        element.html($compile(angular.element(template))(scope));
       }
 
       function getInputType(value) {

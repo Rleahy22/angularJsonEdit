@@ -1,70 +1,43 @@
-.json-editor {
-  z-index: 101;
-  background-color: #D3D3D3;
-  position: fixed;
-  top: 10%;
-  height: 60%;
-  width: 60%;
-  margin: 0 20%;
-  padding: 20px 0 0 0;
-  border: 5px solid #000000;
-  border-radius: 15px;
+.json-container {
+  height: 90%;
+  overflow-y: scroll;
 
-  .json-container {
-    height: 90%;
+  .json-form-div {
+    height: 100%;
     overflow-y: scroll;
 
-    .json-form-div {
-      height: 100%;
-      overflow-y: scroll;
+    .json-form {
 
-      .json-form {
+      .json-form-element {
+        padding: 0 10px 0 3px;
 
-        .json-form-element {
-          padding: 0 10px 0 3px;
-
-          .json-input {
-            height: 25px;
-            padding-top: 0;
-            padding-bottom: 0;
-          }
-        }
-
-        .json-form-row {
-          padding-top: 5px;
-        }
-
-        .nested-json {
-          min-height: 20px;
+        .json-input {
+          height: 25px;
+          padding-top: 0;
+          padding-bottom: 0;
         }
       }
 
-      .json-brackets {
-        padding: 0;
-        margin-left: -10px;
+      .json-form-row {
+        padding-top: 5px;
       }
 
-      .new-property-div {
-        padding: 10px 15px;
-      }
-
-      .new-button-div {
-        padding: 5px 15px;
+      .nested-json {
+        min-height: 20px;
       }
     }
-  }
 
-  .close-modal {
-    height: 10%;
-    padding: 3px 0;
-    background-color: #fff;
-    position: absolute;
-    bottom: 0;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    .json-brackets {
+      padding: 0;
+      margin-left: -10px;
+    }
 
-    button {
-      height: 100%;
+    .new-property-div {
+      padding: 10px 15px;
+    }
+
+    .new-button-div {
+      padding: 5px 15px;
     }
   }
 }

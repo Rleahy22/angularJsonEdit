@@ -5,9 +5,24 @@
   .directive('jsonEditorAddProperty', jsonEditorAddProperty);
 
   function jsonEditorAddProperty() {
+    var template = '<div class="new-property-div" ng-show="showForm">' +
+      '<input type="text" placeholder="name" name="newPropertyName" ng-model="newProperty.name">' +
+        '<select name="newPropertyType" ng-model="newProperty.type">' +
+          '<option value="" ng-disabled="true">Type</option>' +
+          '<option value="array">Array</option>' +
+          '<option value="object">Object</option>' +
+          '<option value="string">String</option>' +
+          '<option value="number">Number</option>' +
+        '</select>' +
+        '<button ng-click="addProperty()" ng-disabled="!newProperty.name || !newProperty.type">Add</button>' +
+      '</div>' +
+    '<div class="new-property-button-div" ng-show="!showForm">' +
+      '<button ng-click="showForm = true">&#43;</button>' +
+    '</div>';
+
     var directive = {
       link: link,
-      templateUrl: 'src/jsonEditorAddProperty.view.html',
+      template: template,
       restrict: 'EA',
       scope: {
         object: '=',

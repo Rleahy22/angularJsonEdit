@@ -6,7 +6,7 @@
 </label>
 <label ng-show="isNested(value) && !isArray(value)  && isArray(parent)" class="json-form-element">{</label>
 <div ng-if="isNested(value)" class="nested-json">
-  <div ng-repeat="(key, value) in parent[key] track by key" ng-init="parent = child; child = value" class="json-form-row" ng-include="'src/jsonNestTemplate.view.html'">
+  <div ng-repeat="(key, value) in parent[key] track by key" ng-init="parent = child; child = value" class="json-form-row" ng-include="'../src/jsonNestTemplate.view.html'">
   </div>
 </div>
 <div ng-if="!isNested(value)" class="json-form-element">
