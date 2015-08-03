@@ -30,7 +30,7 @@
 
     return directive;
 
-    function link(scope, element) {
+    function link(scope) {
       scope.deleteProperty = deleteProperty;
       scope.getInputType   = getInputType;
       scope.isArray        = isArray;

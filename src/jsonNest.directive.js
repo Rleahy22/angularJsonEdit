@@ -40,8 +40,6 @@
     return directive;
 
     function link(scope) {
-      console.log(scope.parent, scope.key);
-
       scope.deleteProperty = deleteProperty;
       scope.getInputType   = getInputType;
       scope.isArray        = isArray;
@@ -69,7 +67,6 @@
 
       function isNested(value) {
         if (typeof value === 'object') {
-          console.log('nested:', value);
           return true;
         } else {
           return false;
