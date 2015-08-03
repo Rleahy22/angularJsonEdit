@@ -4,9 +4,7 @@
   angular.module('angular-json-editor')
   .directive('jsonEditor', jsonEditor);
 
-  jsonEditor.$inject = ['$compile'];
-
-  function jsonEditor($compile) {
+  function jsonEditor() {
     var template = '<div class="json-container">' +
       '<div class="json-form-div">' +
         '<form name="jsonEditorForm" ng-submit="" role="form">' +
@@ -44,8 +42,6 @@
         } else {
           delete object[key];
         }
-
-        element.html($compile(angular.element(template))(scope));
       }
 
       function getInputType(value) {
