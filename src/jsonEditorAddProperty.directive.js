@@ -14,10 +14,10 @@
           '<option value="string">String</option>' +
           '<option value="number">Number</option>' +
         '</select>' +
-        '<button ng-click="addProperty()" ng-disabled="!newProperty.name || !newProperty.type">Add</button>' +
+        '<button class="json-button" ng-click="addProperty()" ng-disabled="!newProperty.name || !newProperty.type">Add</button>' +
       '</div>' +
     '<div class="new-property-button-div" ng-show="!showForm">' +
-      '<button ng-click="showForm = true">&#43;</button>' +
+      '<button class="json-button" ng-click="showForm = true">&#43;</button>' +
     '</div>';
 
     var directive = {

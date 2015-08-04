@@ -11,7 +11,7 @@
           '<label class="json-brackets">{</label>' +
           '<div ng-repeat="(key, value) in config track by key" ng-init="parent = config; child = value" class="json-form" ng-include="\'../src/jsonNestTemplate.view.html\'">' +
           '</div>' +
-          '<div json-editor-add-property object="config" newProperty="{}">' +
+          '<div json-editor-add-property class="json-new-property" object="config" newProperty="{}">' +
           '</div>' +
           '<label class="json-brackets">}</label>' +
         '</form>' +

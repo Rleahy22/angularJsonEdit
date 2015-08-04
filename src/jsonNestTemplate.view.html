@@ -1,4 +1,4 @@
-<button class="json-delete" ng-click="deleteProperty(key, parent)">&times;</button>
+<button class="json-delete json-button" ng-click="deleteProperty(key, parent)">&times;</button>
 <label ng-hide="isArray(parent)" class="json-form-element">
   {{key}}:
   <span ng-show="isNested(value) && isArray(value)">[</span>
@@ -13,7 +13,7 @@
   <input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="json-input" required>
 </div>
 
-<div json-editor-add-property object="value" newProperty="{}" class="" ng-show="isNested(value)">
+<div json-editor-add-property class="json-new-property" object="value" newProperty="{}" class="" ng-show="isNested(value)">
 </div>
 
 <label ng-show="isNested(value)" class="json-form-element">{{isArray(value) ? ']' : '}'}}</label>
