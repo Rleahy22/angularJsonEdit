@@ -6,7 +6,7 @@
     "rleahy22 <ryanleahy90@gmail.com>"
   ],
   "description": "Infinitely nesting, dependency free JSON editor for Angular",
-  "main": "src/app.module.js",
+  "main": "dist/angularJsonEditor.js",
   "keywords": [
     "Angular",
     "JSON",
