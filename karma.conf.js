@@ -12,7 +12,8 @@ module.exports = function(config) {
     frameworks: ['jasmine', 'sinon'],
 
     preprocessors: {
-      '/**/*.html': ['ng-html2js']
+      '/**/*.html': ['ng-html2js'],
+      'src/**/!(*.spec).js': ['coverage']
     },
 
     ngHtml2JsPreprocessor: {
@@ -36,7 +37,17 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
+
+    coverageReporter: {
+      dir: 'coverage',
+      reporters: [
+        {type: 'html', subdir: 'report-html'},
+        {type: 'lcov', subdir: 'report-lcov'}
+      ],
+      type : 'html',
+      dir : 'coverage/'
+    },
 
 
     // web server port

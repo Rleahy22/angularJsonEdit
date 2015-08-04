@@ -27,11 +27,15 @@ describe('jsonEditor', function() {
   beforeEach(function() {
     bard.appModule('angular-json-editor');
 
-    bard.inject(function($window, $rootScope, $compile) {
+    bard.inject(function($window, $rootScope, $compile, $httpBackend) {
       testScope = $rootScope;
       elm = angular.element('<json-editor config="newConfig" show-modal="true">');
 
       testScope.newConfig = angular.merge({}, testConfig);
+
+      $httpBackend.whenGET('../src/jsonNestTemplate.view.html').respond(function() {
+        return [200, {data: '<div></div>'}, {}];
+      });
 
       $compile(elm)(testScope);
       testScope.$digest();

@@ -36,4 +36,4 @@ gulp.task('connect', function() {
   connect.server();
 });
 
-gulp.task('ci', ['lint', 'jscs']);
+gulp.task('ci', ['lint', 'jscs', 'test']);
