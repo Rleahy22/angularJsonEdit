@@ -1,0 +1,47 @@
+.json-container {
+  height: 100%;
+  overflow-y: scroll;
+}
+.json-container .json-form-div {
+  height: 100%;
+  overflow-y: scroll;
+}
+.json-container .json-form-div .json-button {
+  height: 16px;
+  width: 16px;
+  padding: 0;
+}
+.json-container .json-form-div .json-button:hover {
+  cursor: pointer;
+}
+.json-container .json-form-div .json-form {
+  width: 100%;
+  display: inline-block;
+  padding: 4px 8px 0 8px;
+}
+.json-container .json-form-div .json-form .json-form-element {
+  display: inline-block;
+  padding: 4px 8px 0 8px;
+}
+.json-container .json-form-div .json-form .json-form-element .json-input {
+  height: 25px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.json-container .json-form-div .json-form .json-form-row {
+  padding-top: 5px;
+  padding-left: 10px;
+}
+.json-container .json-form-div .json-form .nested-json {
+  min-height: 20px;
+}
+.json-container .json-form-div .json-brackets {
+  display: block;
+  padding: 8px 0 0 0;
+}
+.json-container .json-form-div .json-new-property {
+  padding: 8px 0 0 0;
+}
+.json-container .json-form-div .new-button-div {
+  padding: 5px 15px;
+}
