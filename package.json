@@ -2,7 +2,7 @@
   "name": "angular-json-editor",
   "version": "0.0.1",
   "description": "Infinitely nesting JSON editor for Angular with no dependencies",
-  "main": "jsonEditor.directive.js",
+  "main": "dist/angularJsonEditor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,11 +13,10 @@
   "keywords": [
     "Angular",
     "JSON",
-    "JSON",
     "editor"
   ],
   "author": "Ryan Leahy",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Rleahy22/angularJsonEditor/issues"
   },
