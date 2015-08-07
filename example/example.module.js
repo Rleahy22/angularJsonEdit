@@ -2,7 +2,7 @@
   'use strict';
 
   var exampleApp = angular.module('exampleApp', [
-    'angular-json-editor'
+    'angular-json-edit'
   ])
 
   exampleApp.controller('exampleCtrl', exampleCtrl);

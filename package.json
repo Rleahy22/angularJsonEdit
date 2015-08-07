@@ -1,8 +1,8 @@
 {
-  "name": "angular-json-editor",
+  "name": "angular-json-edit",
   "version": "0.0.1",
   "description": "Infinitely nesting JSON editor for Angular with no dependencies",
-  "main": "dist/angularJsonEditor.js",
+  "main": "dist/angularJsonEdit.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

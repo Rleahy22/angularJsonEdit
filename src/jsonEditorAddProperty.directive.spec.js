@@ -16,7 +16,7 @@ describe('jsonEditorAddProperty', function() {
   describe('addProperty', function() {
     describe('when scope.object is an object', function() {
       beforeEach(function() {
-        bard.appModule('angular-json-editor');
+        bard.appModule('angular-json-edit');
 
         bard.inject(function($window, $rootScope, $compile) {
           testScope = $rootScope;
@@ -69,7 +69,7 @@ describe('jsonEditorAddProperty', function() {
 
     describe('when scope.object is an array', function() {
       beforeEach(function() {
-        bard.appModule('angular-json-editor');
+        bard.appModule('angular-json-edit');
 
         bard.inject(function($window, $rootScope, $compile) {
           testScope = $rootScope;

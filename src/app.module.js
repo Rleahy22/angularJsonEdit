@@ -1,5 +1,5 @@
 (function() {
   'use strict';
 
-  angular.module('angular-json-editor', []);
+  angular.module('angular-json-edit', []);
 })();
