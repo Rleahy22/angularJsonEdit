@@ -11,8 +11,8 @@ bower install angular-json-edit
 Add the javascript and css files to your index.html
 
 ```html
-<script src="bower_components/angularJsonEdit/dist/angularJsonEdit.js"></script>
-<link rel="stylesheet" href="bower_components/angularJsonEdit/dist/styles/jsonEditor.css">
+<script src="bower_components/angular-json-edit/dist/angularJsonEdit.js"></script>
+<link rel="stylesheet" href="bower_components/angular-json-edit/dist/styles/jsonEditor.css">
 ```
 
 Include the directive in your template
