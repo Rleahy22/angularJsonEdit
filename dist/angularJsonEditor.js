@@ -4,6 +4,7 @@
   angular.module('angular-json-editor', [])
   .directive('jsonEditor', jsonEditor)
   .directive('jsonEditorAddProperty', jsonEditorAddProperty)
+  .directive('compile', compile);
 
   function jsonEditor() {
     var template = '<div class="json-container">' +
@@ -140,6 +141,23 @@
         scope.newProperty = {};
         scope.showForm = false;
       }
+    }
+  }
+
+  compile.$inject = ['$compile'];
+
+  function compile($compile) {
+    return function(scope, element, attrs) {
+      scope.$watch(
+        function(scope) {
+          return scope.$eval(attrs.compile);
+        },
+        function(value) {
+          element.html(value);
+
+          $compile(element.contents())(scope);
+        }
+      )
     }
   }
 })();
