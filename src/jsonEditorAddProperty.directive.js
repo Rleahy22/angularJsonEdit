@@ -17,7 +17,7 @@
         '<button class="json-button" ng-click="addProperty()" ng-disabled="!newProperty.name || !newProperty.type">Add</button>' +
       '</div>' +
     '<div class="new-property-button-div" ng-show="!showForm">' +
-      '<button class="json-button" ng-click="showForm = true">&#43;</button>' +
+      '<button class="json-button padded-row" ng-click="showForm = true">&#43;</button>' +
     '</div>';
 
     var directive = {
