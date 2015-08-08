@@ -5,6 +5,18 @@ var jscs     = require('gulp-jscs');
 var Server   = require('karma').Server;
 var less     = require('gulp-less');
 var path     = require('path');
+var concat   = require("gulp-concat");
+var uglify   = require("gulp-uglify");
+var rename   = require("gulp-rename");
+
+gulp.task("build", function() {
+  gulp.src(["src/*.js", '!src/*.spec.js'])
+    .pipe(concat("angularJsonEdit.js"))
+    .pipe(gulp.dest("dist"))
+    .pipe(uglify())
+    .pipe(rename({extname: ".min.js"}))
+    .pipe(gulp.dest("dist"))
+});
 
 gulp.task('less', function () {
   return gulp.src('./src/**/*.less')

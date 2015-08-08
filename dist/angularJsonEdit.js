@@ -1,9 +1,14 @@
 (function() {
   'use strict';
 
-  angular.module('angular-json-edit', [])
+  angular.module('angular-json-edit', []);
+})();
+
+(function() {
+  'use strict';
+
+  angular.module('angular-json-edit')
   .directive('jsonEditor', jsonEditor)
-  .directive('jsonEditorAddProperty', jsonEditorAddProperty)
   .directive('compile', compile);
 
   function jsonEditor() {
@@ -130,6 +135,30 @@
     }
   }
 
+  compile.$inject = ['$compile'];
+
+  function compile($compile) {
+    return function(scope, element, attrs) {
+      scope.$watch(
+        function(scope) {
+          return scope.$eval(attrs.compile);
+        },
+        function(value) {
+          element.html(value);
+
+          $compile(element.contents())(scope);
+        }
+      )
+    }
+  }
+})();
+
+(function() {
+  'use strict';
+
+  angular.module('angular-json-edit')
+  .directive('jsonEditorAddProperty', jsonEditorAddProperty);
+
   function jsonEditorAddProperty() {
     var template = '<div class="new-property-div" ng-show="showForm">' +
       '<input type="text" placeholder="name" name="newPropertyName" ng-model="newProperty.name">' +
@@ -197,23 +226,6 @@
         scope.newProperty = {};
         scope.showForm = false;
       }
-    }
-  }
-
-  compile.$inject = ['$compile'];
-
-  function compile($compile) {
-    return function(scope, element, attrs) {
-      scope.$watch(
-        function(scope) {
-          return scope.$eval(attrs.compile);
-        },
-        function(value) {
-          element.html(value);
-
-          $compile(element.contents())(scope);
-        }
-      )
     }
   }
 })();
