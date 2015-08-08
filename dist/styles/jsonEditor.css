@@ -1,13 +1,21 @@
 .json-container {
   height: 100%;
+  width: 30%;
+  display: inline-block;
 }
 .json-container .json-form-div {
   height: 100%;
-  overflow-y: scroll;
+  position: relative;
+}
+.json-container .json-form-div .json-delete {
+  position: absolute;
+  margin-top: 5px;
+  right: 0;
 }
 .json-container .json-form-div .json-button {
-  height: 16px;
-  width: 16px;
+  height: 19px;
+  min-width: 16px;
+  margin-left: 2px;
   padding: 0;
 }
 .json-container .json-form-div .json-button:hover {
@@ -18,6 +26,9 @@
   display: inline-block;
   padding: 4px 8px 0 8px;
 }
+.json-container .json-form-div .json-form .label-wrapper {
+  width: 100%;
+}
 .json-container .json-form-div .json-form .json-form-element {
   display: inline-block;
   padding: 4px 8px 0 8px;
@@ -26,6 +37,8 @@
   height: 25px;
   padding-top: 0;
   padding-bottom: 0;
+  background: transparent;
+  border: none;
 }
 .json-container .json-form-div .json-form .json-form-row {
   padding-top: 5px;
