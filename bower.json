@@ -1,6 +1,6 @@
 {
   "name": "angular-json-edit",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "https://github.com/Rleahy22/angularJsonEditor",
   "authors": [
     "rleahy22 <ryanleahy90@gmail.com>"
@@ -18,6 +18,9 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "**/*.spec.js"
+    "src",
+    "example",
+    "Gulpfile.js",
+    "karma.conf.js"
   ]
 }
