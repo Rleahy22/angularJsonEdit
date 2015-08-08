@@ -30,8 +30,21 @@
 .json-container .json-form-div .json-form .label-wrapper {
   width: 100%;
 }
+.json-container .json-form-div .json-form .label-wrapper .json-arrow:hover {
+  cursor: pointer;
+}
+.json-container .json-form-div .json-form .label-wrapper .expanded {
+  -ms-transform: rotate(90deg);
+  /* IE 9 */
+  -webkit-transform: rotate(90deg);
+  /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
+}
 .json-container .json-form-div .json-form .label-wrapper .key-span {
   font-weight: 600;
+}
+.json-container .json-form-div .json-form .padded-row {
+  margin-left: 12px;
 }
 .json-container .json-form-div .json-form .json-form-element {
   display: inline-block;
