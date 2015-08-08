@@ -1,7 +1,7 @@
 <button class="json-delete json-button" ng-click="deleteProperty(key, parent)">&times;</button>
 <div class="label-wrapper">
   <label ng-hide="isArray(parent)" class="json-form-element">
-    {{key}}:
+    <span>{{key}}:</span>
     <span ng-show="isNested(value) && isArray(value)">[</span>
     <span ng-show="isNested(value) && !isArray(value)">{</span>
   </label>

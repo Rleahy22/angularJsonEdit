@@ -2,6 +2,7 @@
   height: 100%;
   width: 30%;
   display: inline-block;
+  font-family: Helvetica, Arial, sans-serif;
 }
 .json-container .json-form-div {
   height: 100%;
@@ -28,6 +29,9 @@
 }
 .json-container .json-form-div .json-form .label-wrapper {
   width: 100%;
+}
+.json-container .json-form-div .json-form .label-wrapper .key-span {
+  font-weight: 600;
 }
 .json-container .json-form-div .json-form .json-form-element {
   display: inline-block;

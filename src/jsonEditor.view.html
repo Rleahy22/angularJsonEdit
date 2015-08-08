@@ -1,12 +1,10 @@
 <div class="json-container">
   <div class="json-form-div">
     <form name="jsonEditorForm" ng-submit="" role="form">
-      <label class="json-brackets">{</label>
       <div ng-repeat="(key, value) in config track by key" ng-init="parent = config; child = value" class="json-form" ng-include="'src/jsonNestTemplate.view.html'">
       </div>
       <div json-editor-add-property object="config" newProperty="{}">
       </div>
-      <label class="json-brackets">}</label>
     </form>
   </div>
 </div>

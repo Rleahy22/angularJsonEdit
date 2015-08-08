@@ -9,12 +9,10 @@
     var template = '<div class="json-container">' +
       '<div class="json-form-div">' +
         '<form name="jsonEditorForm" ng-submit="" role="form">' +
-          '<label class="json-brackets">{</label>' +
           '<div ng-repeat="(key, value) in config track by key" ng-init="parent = config; child = value" class="json-form" compile="nest"' +
           '</div>' +
           '<div json-editor-add-property class="json-new-property" object="config" newProperty="{}">' +
           '</div>' +
-          '<label class="json-brackets">}</label>' +
         '</form>' +
       '</div>' +
     '</div>';
@@ -39,7 +37,7 @@
 
       scope.nest = '<button class="json-delete json-button" ng-click="deleteProperty(key, parent)">&times;</button>' +
         '<label ng-hide="isArray(parent)" class="json-form-element">' +
-          '{{key}}:' +
+          '<span>{{key}}:</span>' +
           '<span ng-show="isNested(value) && isArray(value)">[</span>' +
           '<span ng-show="isNested(value) && !isArray(value)">{</span>' +
         '</label>' +
