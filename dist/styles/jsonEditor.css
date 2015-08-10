@@ -71,6 +71,10 @@
 .json-container .json-form-div .json-new-property {
   padding: 8px 0 0 0;
 }
+.json-container .json-form-div .json-new-property .new-property-div,
+.json-container .json-form-div .json-new-property .new-property-button-div {
+  padding-left: 5px;
+}
 .json-container .json-form-div .new-button-div {
   padding: 5px 15px;
 }

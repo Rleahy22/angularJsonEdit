@@ -39,6 +39,15 @@ describe('jsonEditor', function() {
     });
   });
 
+  describe('collapse', function() {
+    it('should add a key and it\'s parent to scope.collapsed', function() {
+      expect(isolateScope.collapsed.length).toEqual(0);
+      isolateScope.collapse('test', {id: 1});
+      expect(isolateScope.collapsed.length).toEqual(1);
+      expect(isolateScope.collapsed[0]).toEqual({test: {id: 1}});
+    });
+  });
+
   describe('deleteProperty', function() {
     it('should remove an object property from the config object at the top level', function() {
       expect(isolateScope.config.id).toEqual(1);
@@ -64,6 +73,61 @@ describe('jsonEditor', function() {
       expect(isolateScope.config.array[0].name).toEqual('second');
       isolateScope.deleteProperty(0, isolateScope.config.array);
       expect(isolateScope.config.array[0].name).toEqual('third');
+    });
+  });
+
+  describe('expand', function() {
+    it('should remove a key and parent from scope.collapsed', function() {
+      isolateScope.collapsed = [
+        {
+          testObject: {
+            id: 2
+          }
+        }
+      ];
+
+      expect(isolateScope.collapsed.length).toEqual(1);
+      isolateScope.expand({testObject: {id: 2}});
+      expect(isolateScope.collapsed.length).toEqual(0);
+    });
+  });
+
+  describe('isCollapsed', function() {
+    it('should return true if a key and parent are collapsed', function() {
+      isolateScope.collapsed = [
+        {
+          testObject: {
+            id: 2
+          }
+        }
+      ];
+
+      var result = isolateScope.isCollapsed({
+        testObject: {
+          id: 2
+        }
+      });
+
+      expect(result).toEqual(true);
+    });
+
+    it('should return false if a key and parent are not collapsed', function() {
+      isolateScope.collapsed = [
+        {
+          testObject: {
+            id: 2
+          }
+        }
+      ];
+
+      console.log(JSON.stringify(isolateScope.collapsed[0]));
+      var result = isolateScope.isCollapsed({
+        testObject: {
+          id: 3
+        }
+      });
+
+      expect(result).toEqual(false);
     });
   });
 

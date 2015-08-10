@@ -51,8 +51,8 @@
           '<div ng-if="!isNested(value)" class="json-form-element">' +
             '<input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="json-input" required>' +
           '</div>' +
+          '<label ng-show="isNested(value) && !isArray(value)  && isArray(parent)" class="json-form-element">{</label>' +
         '</div>' +
-        '<label ng-show="isNested(value) && !isArray(value)  && isArray(parent)" class="json-form-element">{</label>' +
         '<div ng-if="isNested(value)" ng-show="!isCollapsed(key, parent)" class="nested-json">' +
           '<div ng-repeat="(key, value) in parent[key] track by key" ng-init="parent = child; child = value" class="json-form-row" compile="nest">' +
           '</div>' +
@@ -62,7 +62,7 @@
         '<label ng-show="isNested(value)" class="json-form-element padded-row">{{isArray(value) ? \']\' : \'}\'}}</label>';
 
       function collapse(key, parent) {
-        var newObj = {}
+        var newObj = {};
         newObj[key] = parent;
         scope.collapsed.push(newObj);
       }
@@ -77,11 +77,11 @@
 
       function expand(key, parent) {
         var check = {};
-        var result = false
+        var result = false;
         check[key] = parent;
 
         scope.collapsed.forEach(function(element, index) {
-          if (element[key] === check[key]) {
+          if (angular.equals(element[key], check[key])) {
             scope.collapsed.splice(index, 1);
           }
         });
@@ -101,11 +101,11 @@
 
       function isCollapsed(key, parent) {
         var check = {};
-        var result = false
+        var result = false;
         check[key] = parent;
 
         scope.collapsed.forEach(function(element) {
-          if (element[key] === check[key]) {
+          if (angular.equals(element[key], check[key])) {
             result = true;
           }
         });
@@ -137,12 +137,13 @@
         function(scope) {
           return scope.$eval(attrs.compile);
         },
+
         function(value) {
           element.html(value);
-
           $compile(element.contents())(scope);
         }
-      )
-    }
+
+      );
+    };
   }
 })();

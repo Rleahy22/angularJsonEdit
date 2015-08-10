@@ -57,8 +57,8 @@
           '<div ng-if="!isNested(value)" class="json-form-element">' +
             '<input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="json-input" required>' +
           '</div>' +
+          '<label ng-show="isNested(value) && !isArray(value)  && isArray(parent)" class="json-form-element">{</label>' +
         '</div>' +
-        '<label ng-show="isNested(value) && !isArray(value)  && isArray(parent)" class="json-form-element">{</label>' +
         '<div ng-if="isNested(value)" ng-show="!isCollapsed(key, parent)" class="nested-json">' +
           '<div ng-repeat="(key, value) in parent[key] track by key" ng-init="parent = child; child = value" class="json-form-row" compile="nest">' +
           '</div>' +
@@ -68,7 +68,7 @@
         '<label ng-show="isNested(value)" class="json-form-element padded-row">{{isArray(value) ? \']\' : \'}\'}}</label>';
 
       function collapse(key, parent) {
-        var newObj = {}
+        var newObj = {};
         newObj[key] = parent;
         scope.collapsed.push(newObj);
       }
@@ -83,11 +83,11 @@
 
       function expand(key, parent) {
         var check = {};
-        var result = false
+        var result = false;
         check[key] = parent;
 
         scope.collapsed.forEach(function(element, index) {
-          if (element[key] === check[key]) {
+          if (angular.equals(element[key], check[key])) {
             scope.collapsed.splice(index, 1);
           }
         });
@@ -107,11 +107,11 @@
 
       function isCollapsed(key, parent) {
         var check = {};
-        var result = false
+        var result = false;
         check[key] = parent;
 
         scope.collapsed.forEach(function(element) {
-          if (element[key] === check[key]) {
+          if (angular.equals(element[key], check[key])) {
             result = true;
           }
         });
@@ -143,13 +143,14 @@
         function(scope) {
           return scope.$eval(attrs.compile);
         },
+
         function(value) {
           element.html(value);
-
           $compile(element.contents())(scope);
         }
-      )
-    }
+
+      );
+    };
   }
 })();
 
@@ -160,16 +161,18 @@
   .directive('jsonEditorAddProperty', jsonEditorAddProperty);
 
   function jsonEditorAddProperty() {
-    var template = '<div class="new-property-div" ng-show="showForm">' +
-      '<input type="text" placeholder="name" name="newPropertyName" ng-model="newProperty.name">' +
+    var template = '<div class="new-property-div padded-row" ng-show="showForm">' +
+      '<input type="text" placeholder="key" name="newPropertyName" ng-model="newProperty.name" ng-show="!isParentArray()">' +
         '<select name="newPropertyType" ng-model="newProperty.type">' +
           '<option value="" ng-disabled="true">Type</option>' +
           '<option value="array">Array</option>' +
           '<option value="object">Object</option>' +
           '<option value="string">String</option>' +
           '<option value="number">Number</option>' +
+          '<option value="boolean">Boolean</option>' +
         '</select>' +
-        '<button class="json-button" ng-click="addProperty()" ng-disabled="!newProperty.name || !newProperty.type">Add</button>' +
+        '<input type="text" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()">' +
+        '<button class="json-button" ng-click="addProperty()" ng-disabled="!newProperty.type">Add</button>' +
       '</div>' +
     '<div class="new-property-button-div" ng-show="!showForm">' +
       '<button class="json-button padded-row" ng-click="showForm = true">&#43;</button>' +
@@ -188,10 +191,12 @@
     return directive;
 
     function link(scope) {
-      scope.addProperty  = addProperty;
+      scope.addProperty    = addProperty;
+      scope.isParentArray  = isParentArray;
+      scope.showValueField = showValueField;
 
       function addProperty() {
-        if (Array.isArray(scope.object)) {
+        if (scope.isParentArray()) {
           switch (scope.newProperty.type) {
             case 'array':
               scope.object.push([]);
@@ -200,10 +205,13 @@
               scope.object.push({});
               break;
             case 'string':
-              scope.object.push('');
+              scope.object.push(scope.newProperty.value || '');
               break;
             case 'number':
-              scope.object.push(0);
+              scope.object.push(parseInt(scope.newProperty.value) || 0);
+              break;
+            case 'boolean':
+              scope.object.push(Boolean(scope.newProperty.value));
               break;
           }
         } else {
@@ -215,16 +223,31 @@
               scope.object[scope.newProperty.name] = {};
               break;
             case 'string':
-              scope.object[scope.newProperty.name] = '';
+              scope.object[scope.newProperty.name] = scope.newProperty.value || '';
               break;
             case 'number':
-              scope.object[scope.newProperty.name] = 0;
+              scope.object[scope.newProperty.name] = parseInt(scope.newProperty.value) || 0;
+              break;
+            case 'boolean':
+              scope.object[scope.newProperty.name] = Boolean(scope.newProperty.value);
               break;
           }
         }
 
         scope.newProperty = {};
         scope.showForm = false;
+      }
+
+      function isParentArray() {
+        return Array.isArray(scope.object);
+      }
+
+      function showValueField() {
+        if (scope.newProperty) {
+          return (scope.newProperty.type === 'string' ||
+            scope.newProperty.type === 'number' ||
+            scope.newProperty.type === 'boolean');
+        }
       }
     }
   }
