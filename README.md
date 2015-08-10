@@ -1,6 +1,6 @@
 # angularJsonEdit
 
-An infinitely nesting, dependency free interactive JSON editor for Angular.  Can support an infinitely nested object without the need to install jQuery, bootstrap, or any ui dependencies.  All changes occur within the digest cycle with no manual calls of $scope.$digest or $scope.$apply. 100% test covered.
+An infinitely nesting, dependency free interactive JSON editor for Angular.  Can support an infinitely nested object without the need to install jQuery, bootstrap, or any ui dependencies.  All changes occur within the digest cycle. 100% test covered.
 
 # Usage
 
