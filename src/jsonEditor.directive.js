@@ -43,15 +43,14 @@
         '<div class="label-wrapper" ng-class="{\'padded-row\': !isNested(value)}">' +
           '<i ng-show="isNested(value) && isCollapsed(key, parent)" class="json-arrow" ng-click="expand(key, parent)">&#8658;</i>' +
           '<i ng-show="isNested(value) && !isCollapsed(key, parent)" class="json-arrow" ng-click="collapse(key, parent)">&#8659;</i>' +
-          '<label ng-hide="isArray(parent)" class="json-form-element">' +
-            '<span class="key-span">{{key}}:</span>' +
+          '<label class="json-form-element">' +
+            '<span class="key-span" ng-hide="isArray(parent)">{{key}}:</span>' +
             '<span ng-show="isNested(value) && isArray(value)"> [</span>' +
             '<span ng-show="isNested(value) && !isArray(value)"> {</span>' +
           '</label>' +
           '<div ng-if="!isNested(value)" class="json-form-element">' +
             '<input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="json-input" required>' +
           '</div>' +
-          '<label ng-show="isNested(value) && !isArray(value)  && isArray(parent)" class="json-form-element">{</label>' +
         '</div>' +
         '<div ng-if="isNested(value)" ng-show="!isCollapsed(key, parent)" class="nested-json">' +
           '<div ng-repeat="(key, value) in parent[key] track by key" ng-init="parent = child; child = value" class="json-form-row" compile="nest">' +

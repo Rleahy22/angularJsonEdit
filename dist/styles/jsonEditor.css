@@ -1,4 +1,5 @@
 .json-container {
+  box-sizing: border-box;
   height: 100%;
   width: 30%;
   display: inline-block;
@@ -18,9 +19,15 @@
   min-width: 16px;
   margin-left: 2px;
   padding: 0;
+  background: none;
+  border: none;
+  font-weight: 600;
 }
 .json-container .json-form-div .json-button:hover {
   cursor: pointer;
+}
+.json-container .json-form-div .value-field {
+  margin-left: 5px;
 }
 .json-container .json-form-div .json-form {
   width: 100%;
