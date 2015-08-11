@@ -54,7 +54,7 @@
             '<span ng-show="isNested(value) && isArray(value)"> [</span>' +
             '<span ng-show="isNested(value) && !isArray(value)"> {</span>' +
           '</label>' +
-          '<div ng-if="!isNested(value)" class="json-form-element">' +
+          '<div ng-if="!isNested(value)" class="json-input-div">' +
             '<input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="json-input" required>' +
           '</div>' +
         '</div>' +
@@ -82,7 +82,6 @@
 
       function expand(key, parent) {
         var check = {};
-        var result = false;
         check[key] = parent;
 
         scope.collapsed.forEach(function(element, index) {

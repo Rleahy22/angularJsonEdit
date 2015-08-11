@@ -57,7 +57,11 @@
   display: inline-block;
   padding: 4px 8px 0 8px;
 }
-.json-container .json-form-div .json-form .json-form-element .json-input {
+.json-container .json-form-div .json-form .json-input-div {
+  display: inline-block;
+  padding: 4px 8px 0 0;
+}
+.json-container .json-form-div .json-form .json-input-div .json-input {
   height: 25px;
   padding-top: 0;
   padding-bottom: 0;
@@ -66,7 +70,7 @@
 }
 .json-container .json-form-div .json-form .json-form-row {
   padding-top: 5px;
-  padding-left: 10px;
+  padding-left: 12px;
 }
 .json-container .json-form-div .json-form .nested-json {
   min-height: 20px;
