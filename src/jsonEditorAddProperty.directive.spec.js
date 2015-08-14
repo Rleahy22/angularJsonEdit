@@ -65,6 +65,22 @@ describe('jsonEditorAddProperty', function() {
         isolateScope.addProperty();
         expect(isolateScope.object.newNumber).toEqual(0);
       });
+
+      describe('getInputType', function() {
+        it('should return "text" for a string', function() {
+          isolateScope.newProperty = {
+            type: 'string'
+          };
+          expect(isolateScope.getInputType()).toEqual('text');
+        });
+
+        it('should return "number" for a number', function() {
+          isolateScope.newProperty = {
+            type: 'number'
+          };
+          expect(isolateScope.getInputType()).toEqual('number');
+        });
+      });
     });
 
     describe('when scope.object is an array', function() {

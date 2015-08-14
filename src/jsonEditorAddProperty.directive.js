@@ -15,7 +15,7 @@
           '<option value="number">Number</option>' +
           '<option value="boolean">Boolean</option>' +
         '</select>' +
-        '<input type="text" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()">' +
+        '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()">' +
         '<button class="json-button" ng-click="addProperty()" ng-show="newProperty.type">&#43;</button>' +
       '</div>' +
     '<div class="new-property-button-div" ng-show="!showForm">' +
@@ -36,6 +36,7 @@
 
     function link(scope) {
       scope.addProperty    = addProperty;
+      scope.getInputType   = getInputType;
       scope.isParentArray  = isParentArray;
       scope.showValueField = showValueField;
 
@@ -80,6 +81,14 @@
 
         scope.newProperty = {};
         scope.showForm = false;
+      }
+
+      function getInputType() {
+        if (scope.newProperty && scope.newProperty.type === 'number') {
+          return 'number';
+        } else {
+          return 'text';
+        }
       }
 
       function isParentArray() {
