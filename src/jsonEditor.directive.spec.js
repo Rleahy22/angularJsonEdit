@@ -48,50 +48,6 @@ describe('jsonEditor', function() {
     });
   });
 
-  describe('deepEquals', function() {
-    it('should handle deep inequality', function() {
-      var testA = {
-        this: {
-          that: [
-            'cat',
-            true,
-            7
-          ]
-        },
-        test: {
-          array: [
-            {
-              deepCheck: {
-                deeperCheck: "here"
-              }
-            }
-          ]
-        }
-      };
-
-      var testB = {
-        this: {
-          that: [
-            'cat',
-            true,
-            7
-          ]
-        },
-        test: {
-          array: [
-            {
-              deepCheck: {
-                deeperCheck: "there"
-              }
-            }
-          ]
-        }
-      };
-
-      expect(isolateScope.deepEquals(testA, testB)).toEqual(false);
-    });
-  });
-
   describe('deleteProperty', function() {
     it('should remove an object property from the config object at the top level', function() {
       expect(isolateScope.config.id).toEqual(1);
