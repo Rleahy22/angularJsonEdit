@@ -48,6 +48,50 @@ describe('jsonEditor', function() {
     });
   });
 
+  describe('deepEquals', function() {
+    it('should handle deep inequality', function() {
+      var testA = {
+        this: {
+          that: [
+            'cat',
+            true,
+            7
+          ]
+        },
+        test: {
+          array: [
+            {
+              deepCheck: {
+                deeperCheck: "here"
+              }
+            }
+          ]
+        }
+      };
+
+      var testB = {
+        this: {
+          that: [
+            'cat',
+            true,
+            7
+          ]
+        },
+        test: {
+          array: [
+            {
+              deepCheck: {
+                deeperCheck: "there"
+              }
+            }
+          ]
+        }
+      };
+
+      expect(isolateScope.deepEquals(testA, testB)).toEqual(false);
+    });
+  });
+
   describe('deleteProperty', function() {
     it('should remove an object property from the config object at the top level', function() {
       expect(isolateScope.config.id).toEqual(1);
@@ -94,15 +138,15 @@ describe('jsonEditor', function() {
 
   describe('isCollapsed', function() {
     it('should return true if a key and parent are collapsed', function() {
-      isolateScope.collapsed = [
+      isolateScope.collapse('returnTrue',
         {
           testObject: {
             id: 2
           }
         }
-      ];
+      );
 
-      var result = isolateScope.isCollapsed({
+      var result = isolateScope.isCollapsed('returnTrue', {
         testObject: {
           id: 2
         }
@@ -111,17 +155,16 @@ describe('jsonEditor', function() {
       expect(result).toEqual(true);
     });
 
-    it('should return false if a key and parent are not collapsed', function() {
-      isolateScope.collapsed = [
+    it('should return false if a key and parent are collapsed', function() {
+      isolateScope.collapse('returnTrue',
         {
           testObject: {
             id: 2
           }
         }
-      ];
+      );
 
-      console.log(JSON.stringify(isolateScope.collapsed[0]));
-      var result = isolateScope.isCollapsed({
+      var result = isolateScope.isCollapsed('returnTrue', {
         testObject: {
           id: 3
         }

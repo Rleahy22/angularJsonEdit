@@ -38,6 +38,7 @@
     function link(scope) {
       scope.collapse       = collapse;
       scope.collapsed      = [];
+      scope.deepEquals     = deepEquals;
       scope.deleteProperty = deleteProperty;
       scope.expand         = expand;
       scope.getInputType   = getInputType;
@@ -72,6 +73,36 @@
         scope.collapsed.push(newObj);
       }
 
+      function deepEquals(a, b) {
+        if (angular.equals(a, b)) {
+
+          for (var prop in a) {
+            if (!b.hasOwnProperty(prop)) {
+              console.log('PROP');
+              return false;
+            }
+
+            if (!angular.equals(a[prop], b[prop])) {
+              console.log('Value');
+              return false;
+            }
+
+            if (!scope.deepEquals(a[prop], b[prop])) {
+              return false
+            }
+          }
+
+          for (var bProp in b) {
+            if (!a.hasOwnProperty(bProp)) {
+              return false;
+            }
+          }
+          return true;
+        } else {
+          return false;
+        }
+      }
+
       function deleteProperty(key, object) {
         if (scope.isArray(object)) {
           object.splice(key, 1);
@@ -85,7 +116,7 @@
         check[key] = parent;
 
         scope.collapsed.forEach(function(element, index) {
-          if (angular.equals(element[key], check[key])) {
+          if (scope.deepEquals(element[key], check[key])) {
             scope.collapsed.splice(index, 1);
           }
         });
@@ -109,7 +140,7 @@
         check[key] = parent;
 
         scope.collapsed.forEach(function(element) {
-          if (angular.equals(element[key], check[key])) {
+          if (scope.deepEquals(element[key], check[key])) {
             result = true;
           }
         });
