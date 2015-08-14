@@ -124,12 +124,6 @@
           return false;
         }
       }
-
-      scope.$watch('showModal', function(newVal) {
-        if (newVal === true) {
-          scope.savedConfig = angular.merge({}, scope.config);
-        }
-      });
     }
   }
 
@@ -238,7 +232,7 @@
       }
 
       function getInputType() {
-        if (scope.newProperty.type === 'number') {
+        if (scope.newProperty && scope.newProperty.type === 'number') {
           return 'number';
         } else {
           return 'text';

@@ -118,12 +118,6 @@
           return false;
         }
       }
-
-      scope.$watch('showModal', function(newVal) {
-        if (newVal === true) {
-          scope.savedConfig = angular.merge({}, scope.config);
-        }
-      });
     }
   }
 
