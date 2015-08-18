@@ -48,6 +48,15 @@ describe('jsonEditor', function() {
     });
   });
 
+  describe('highlight', function() {
+    it('should add a key and it\'s parent to scope.highlighted', function() {
+      expect(isolateScope.highlighted.length).toEqual(0);
+      isolateScope.highlight('test', {id: 1});
+      expect(isolateScope.highlighted.length).toEqual(1);
+      expect(isolateScope.highlighted[0]).toEqual({test: {id: 1}});
+    });
+  });
+
   describe('deleteProperty', function() {
     it('should remove an object property from the config object at the top level', function() {
       expect(isolateScope.config.id).toEqual(1);
@@ -111,7 +120,7 @@ describe('jsonEditor', function() {
       expect(result).toEqual(true);
     });
 
-    it('should return false if a key and parent are collapsed', function() {
+    it('should return false if a key and parent are not collapsed', function() {
       isolateScope.collapse('returnTrue',
         {
           testObject: {
@@ -121,6 +130,44 @@ describe('jsonEditor', function() {
       );
 
       var result = isolateScope.isCollapsed('returnTrue', {
+        testObject: {
+          id: 3
+        }
+      });
+
+      expect(result).toEqual(false);
+    });
+  });
+
+  describe('isHighlighted', function() {
+    it('should return true if a key and parent are highlighted', function() {
+      isolateScope.highlight('returnTrue',
+        {
+          testObject: {
+            id: 2
+          }
+        }
+      );
+
+      var result = isolateScope.isHighlighted('returnTrue', {
+        testObject: {
+          id: 2
+        }
+      });
+
+      expect(result).toEqual(true);
+    });
+
+    it('should return false if a key and parent are not highlighted', function() {
+      isolateScope.highlight('returnTrue',
+        {
+          testObject: {
+            id: 2
+          }
+        }
+      );
+
+      var result = isolateScope.isHighlighted('returnTrue', {
         testObject: {
           id: 3
         }
@@ -149,6 +196,22 @@ describe('jsonEditor', function() {
 
     it('should return "number" for a number', function() {
       expect(isolateScope.getInputType(42)).toEqual('number');
+    });
+  });
+
+  describe('unHighlight', function() {
+    it('should remove a key and parent from scope.highlighted', function() {
+      isolateScope.highlighted = [
+        {
+          testObject: {
+            id: 2
+          }
+        }
+      ];
+
+      expect(isolateScope.highlighted.length).toEqual(1);
+      isolateScope.unHighlight({testObject: {id: 2}});
+      expect(isolateScope.highlighted.length).toEqual(0);
     });
   });
 });

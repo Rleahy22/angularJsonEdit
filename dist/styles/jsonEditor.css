@@ -9,6 +9,9 @@
   height: 100%;
   position: relative;
 }
+.json-container .json-form-div .json-highlight {
+  background-color: #EEEEEE;
+}
 .json-container .json-form-div .json-delete {
   position: absolute;
   margin-top: 5px;

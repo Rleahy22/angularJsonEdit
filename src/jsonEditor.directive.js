@@ -9,7 +9,7 @@
     var template = '<div class="json-container">' +
       '<div class="json-form-div">' +
         '<form name="jsonEditorForm" ng-submit="" role="form">' +
-          '<div ng-repeat="(key, value) in config track by key" ng-init="parent = config; child = value" class="json-form" compile="nest"' +
+          '<div ng-repeat="(key, value) in config track by key" ng-init="parent = config; child = value" class="json-form" compile="nest" ng-class="{\'json-highlight\' : isHighlighted(key, parent)}">' +
           '</div>' +
           '<div json-editor-add-property class="json-new-property" object="config" newProperty="{}">' +
           '</div>' +
@@ -35,11 +35,15 @@
       scope.deleteProperty = deleteProperty;
       scope.expand         = expand;
       scope.getInputType   = getInputType;
+      scope.highlight      = highlight;
+      scope.highlighted    = [];
       scope.isArray        = isArray;
       scope.isCollapsed    = isCollapsed;
+      scope.isHighlighted  = isHighlighted;
       scope.isNested       = isNested;
+      scope.unHighlight    = unHighlight;
 
-      scope.nest = '<button class="json-delete json-button" ng-click="deleteProperty(key, parent)">&times;</button>' +
+      scope.nest = '<button class="json-delete json-button" ng-click="deleteProperty(key, parent)" ng-mouseover="highlight(key, parent)"  ng-mouseleave="unHighlight(key, parent)">&times;</button>' +
         '<div class="label-wrapper" ng-class="{\'padded-row\': !isNested(value)}">' +
           '<i ng-show="isNested(value) && isCollapsed(key, parent)" class="json-arrow" ng-click="expand(key, parent)">&#8658;</i>' +
           '<i ng-show="isNested(value) && !isCollapsed(key, parent)" class="json-arrow" ng-click="collapse(key, parent)">&#8659;</i>' +
@@ -53,7 +57,7 @@
           '</div>' +
         '</div>' +
         '<div ng-if="isNested(value)" ng-show="!isCollapsed(key, parent)" class="nested-json">' +
-          '<div ng-repeat="(key, value) in parent[key] track by key" ng-init="parent = child; child = value" class="json-form-row" compile="nest">' +
+          '<div ng-repeat="(key, value) in parent[key] track by key" ng-init="parent = child; child = value" class="json-form-row" compile="nest" ng-class="{\'json-highlight\' : isHighlighted(key, parent)}">' +
           '</div>' +
           '<div json-editor-add-property class="json-new-property padded-row" object="value" newProperty="{}" class="" ng-show="isNested(value)">' +
           '</div>' +
@@ -64,7 +68,6 @@
         var newObj = {};
         newObj[key] = parent;
         scope.collapsed.push(newObj);
-        console.log(scope.collapsed);
       }
 
       function deleteProperty(key, object) {
@@ -94,6 +97,12 @@
         }
       }
 
+      function highlight(key, parent) {
+        var newObj = {};
+        newObj[key] = parent;
+        scope.highlighted.push(newObj);
+      }
+
       function isArray(value) {
         return Array.isArray(value);
       }
@@ -112,12 +121,37 @@
         return result;
       }
 
+      function isHighlighted(key, parent) {
+        var check = {};
+        var result = false;
+        check[key] = parent;
+
+        scope.highlighted.forEach(function(element) {
+          if (angular.equals(element[key], check[key])) {
+            result = true;
+          }
+        });
+
+        return result;
+      }
+
       function isNested(value) {
         if (typeof value === 'object') {
           return true;
         } else {
           return false;
         }
+      }
+
+      function unHighlight(key, parent) {
+        var check = {};
+        check[key] = parent;
+
+        scope.highlighted.forEach(function(element, index) {
+          if (angular.equals(element[key], check[key])) {
+            scope.highlighted.splice(index, 1);
+          }
+        });
       }
     }
   }
