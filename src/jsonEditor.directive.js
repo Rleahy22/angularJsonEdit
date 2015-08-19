@@ -45,8 +45,8 @@
 
       scope.nest = '<button class="json-delete json-button" ng-click="deleteProperty(key, parent)" ng-mouseover="highlight(key, parent)"  ng-mouseleave="unHighlight(key, parent)">&times;</button>' +
         '<div class="label-wrapper" ng-class="{\'padded-row\': !isNested(value)}">' +
-          '<i ng-show="isNested(value) && isCollapsed(key, parent)" class="json-arrow" ng-click="expand(key, parent)">&#8658;</i>' +
-          '<i ng-show="isNested(value) && !isCollapsed(key, parent)" class="json-arrow" ng-click="collapse(key, parent)">&#8659;</i>' +
+          '<span ng-show="isNested(value) && isCollapsed(key, parent)" class="json-arrow" ng-click="expand(key, parent)">&#8658;</span>' +
+          '<span ng-show="isNested(value) && !isCollapsed(key, parent)" class="json-arrow" ng-click="collapse(key, parent)">&#8659;</span>' +
           '<label class="json-form-element">' +
             '<span class="key-span" ng-hide="isArray(parent)">{{key}}:</span>' +
             '<span ng-show="isNested(value) && isArray(value)"> [</span>' +
