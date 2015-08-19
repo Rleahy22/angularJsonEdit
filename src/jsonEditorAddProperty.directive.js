@@ -41,7 +41,7 @@
       scope.showValueField = showValueField;
 
       function addProperty() {
-        if (scope.isParentArray()) {
+        if (scope.isParentArray() && scope.newProperty) {
           switch (scope.newProperty.type) {
             case 'array':
               scope.object.push([]);
@@ -59,7 +59,7 @@
               scope.object.push(Boolean(scope.newProperty.value));
               break;
           }
-        } else {
+        } else if (scope.newProperty) {
           switch (scope.newProperty.type) {
             case 'array':
               scope.object[scope.newProperty.name] = [];

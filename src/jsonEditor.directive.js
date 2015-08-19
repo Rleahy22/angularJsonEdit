@@ -22,8 +22,7 @@
       template: template,
       restrict: 'EA',
       scope: {
-        config: '=',
-        showModal: '='
+        config: '='
       }
     };
 
@@ -43,8 +42,7 @@
       scope.isNested       = isNested;
       scope.unHighlight    = unHighlight;
 
-      scope.nest = '<button class="json-delete json-button" ng-click="deleteProperty(key, parent)" ng-mouseover="highlight(key, parent)"  ng-mouseleave="unHighlight(key, parent)">&times;</button>' +
-        '<div class="label-wrapper" ng-class="{\'padded-row\': !isNested(value)}">' +
+      scope.nest = '<div class="label-wrapper" ng-class="{\'padded-row\': !isNested(value)}">' +
           '<span ng-show="isNested(value) && isCollapsed(key, parent)" class="json-arrow" ng-click="expand(key, parent)">&#8658;</span>' +
           '<span ng-show="isNested(value) && !isCollapsed(key, parent)" class="json-arrow" ng-click="collapse(key, parent)">&#8659;</span>' +
           '<label class="json-form-element">' +
@@ -55,6 +53,7 @@
           '<div ng-if="!isNested(value)" class="json-input-div">' +
             '<input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="json-input" required>' +
           '</div>' +
+          '<button class="json-delete json-button" type="button" ng-click="deleteProperty(key, parent)" ng-mouseover="highlight(key, parent)"  ng-mouseleave="unHighlight(key, parent)">&times;</button>' +
         '</div>' +
         '<div ng-if="isNested(value)" ng-show="!isCollapsed(key, parent)" class="nested-json">' +
           '<div ng-repeat="(key, value) in parent[key] track by key" ng-init="parent = child; child = value" class="json-form-row" compile="nest" ng-class="{\'json-highlight\' : isHighlighted(key, parent)}">' +
