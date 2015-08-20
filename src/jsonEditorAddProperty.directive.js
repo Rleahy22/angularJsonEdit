@@ -17,6 +17,10 @@
         '</select>' +
         '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()">' +
         '<button class="json-button" ng-click="addProperty()" ng-show="newProperty.type">add property</button>' +
+        '<select name="newPropertyType" ng-model="newProperty.value" ng-show="newProperty.type === \'boolean\'">' +
+          '<option value="true">true</option>' +
+          '<option value="">false</option>' +
+        '</select>' +
       '</div>' +
     '<div class="new-property-button-div" ng-show="!showForm">' +
       '<button class="json-button padded-row" ng-click="showForm = true">+ add property</button>' +
@@ -41,7 +45,7 @@
       scope.showValueField = showValueField;
 
       function addProperty() {
-        if (scope.isParentArray()) {
+        if (scope.isParentArray() && scope.newProperty) {
           switch (scope.newProperty.type) {
             case 'array':
               scope.object.push([]);
@@ -59,7 +63,7 @@
               scope.object.push(Boolean(scope.newProperty.value));
               break;
           }
-        } else {
+        } else if (scope.newProperty) {
           switch (scope.newProperty.type) {
             case 'array':
               scope.object[scope.newProperty.name] = [];
@@ -98,8 +102,7 @@
       function showValueField() {
         if (scope.newProperty) {
           return (scope.newProperty.type === 'string' ||
-            scope.newProperty.type === 'number' ||
-            scope.newProperty.type === 'boolean');
+            scope.newProperty.type === 'number');
         }
       }
     }
