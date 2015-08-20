@@ -16,10 +16,10 @@
           '<option value="boolean">Boolean</option>' +
         '</select>' +
         '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()">' +
-        '<button class="json-button" ng-click="addProperty()" ng-show="newProperty.type">&#43;</button>' +
+        '<button class="json-button" ng-click="addProperty()" ng-show="newProperty.type">add property</button>' +
       '</div>' +
     '<div class="new-property-button-div" ng-show="!showForm">' +
-      '<button class="json-button padded-row" ng-click="showForm = true">&#43;</button>' +
+      '<button class="json-button padded-row" ng-click="showForm = true">+ add property</button>' +
     '</div>';
 
     var directive = {

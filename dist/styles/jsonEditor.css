@@ -5,22 +5,19 @@
   display: inline-block;
   font-family: Helvetica, Arial, sans-serif;
 }
+.json-container * {
+  box-sizing: border-box;
+}
 .json-container .json-form-div {
   height: 100%;
   position: relative;
 }
-.json-container .json-form-div .json-highlight {
-  background-color: #EEEEEE;
-}
-.json-container .json-form-div .json-delete {
-  position: absolute;
-  margin-top: 5px;
-  right: 0;
+.json-container .json-form-div .json-delete-highlight {
+  background-color: rgba(200, 0, 0, 0.2);
 }
 .json-container .json-form-div .json-button {
   height: 19px;
   min-width: 16px;
-  margin-left: 2px;
   padding: 0;
   background: none;
   border: none;
@@ -29,16 +26,35 @@
 .json-container .json-form-div .json-button:hover {
   cursor: pointer;
 }
+.json-container .json-form-div .json-delete {
+  height: 100%;
+  width: 30px;
+}
 .json-container .json-form-div .value-field {
   margin-left: 5px;
 }
 .json-container .json-form-div .json-form {
   width: 100%;
-  display: inline-block;
-  padding: 4px 8px 0 8px;
+  padding: 5px;
+}
+.json-container .json-form-div .json-form .padded-row {
+  margin-left: 12px;
 }
 .json-container .json-form-div .json-form .label-wrapper {
   width: 100%;
+  height: 30px;
+  display: flex;
+  margin-left: 0;
+  padding-left: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+.json-container .json-form-div .json-form .label-wrapper:hover {
+  cursor: pointer;
+  background-color: #DDD;
+}
+.json-container .json-form-div .json-form .label-wrapper.json-collapsed-row + .nested-json {
+  display: none;
 }
 .json-container .json-form-div .json-form .label-wrapper .json-arrow:hover {
   cursor: pointer;
@@ -53,27 +69,26 @@
 .json-container .json-form-div .json-form .label-wrapper .key-span {
   font-weight: 600;
 }
-.json-container .json-form-div .json-form .padded-row {
-  margin-left: 12px;
+.json-container .json-form-div .json-form .label-wrapper.json-closing-brace:hover {
+  cursor: default;
+  background-color: inherit;
 }
 .json-container .json-form-div .json-form .json-form-element {
   display: inline-block;
-  padding: 4px 8px 0 8px;
 }
 .json-container .json-form-div .json-form .json-input-div {
   display: inline-block;
-  padding: 4px 8px 0 0;
 }
 .json-container .json-form-div .json-form .json-input-div .json-input {
   height: 25px;
   padding-top: 0;
   padding-bottom: 0;
   background: transparent;
+  cursor: pointer;
   border: none;
 }
 .json-container .json-form-div .json-form .json-form-row {
-  padding-top: 5px;
-  padding-left: 12px;
+  margin-left: 10px;
 }
 .json-container .json-form-div .json-form .nested-json {
   min-height: 20px;
@@ -81,13 +96,6 @@
 .json-container .json-form-div .json-brackets {
   display: block;
   padding: 8px 0 0 0;
-}
-.json-container .json-form-div .json-new-property {
-  padding: 8px 0 0 0;
-}
-.json-container .json-form-div .json-new-property .new-property-div,
-.json-container .json-form-div .json-new-property .new-property-button-div {
-  padding-left: 5px;
 }
 .json-container .json-form-div .new-button-div {
   padding: 5px 15px;

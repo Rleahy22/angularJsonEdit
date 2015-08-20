@@ -49,3 +49,5 @@ gulp.task('connect', function() {
 });
 
 gulp.task('ci', ['lint', 'jscs', 'test']);
+
+gulp.task('deploy', ['less', 'build']);
