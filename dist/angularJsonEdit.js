@@ -198,6 +198,10 @@
           '<option value="boolean">Boolean</option>' +
         '</select>' +
         '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()">' +
+        '<select name="newPropertyType" ng-model="newProperty.value" ng-show="newProperty.type === \'boolean\'">' +
+          '<option value="true">true</option>' +
+          '<option value="">false</option>' +
+        '</select>' +
         '<button class="json-button" ng-click="addProperty()" ng-show="newProperty.type">&#43;</button>' +
       '</div>' +
     '<div class="new-property-button-div" ng-show="!showForm">' +
@@ -280,8 +284,7 @@
       function showValueField() {
         if (scope.newProperty) {
           return (scope.newProperty.type === 'string' ||
-            scope.newProperty.type === 'number' ||
-            scope.newProperty.type === 'boolean');
+            scope.newProperty.type === 'number');
         }
       }
     }
