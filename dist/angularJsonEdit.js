@@ -240,12 +240,8 @@
           '<option value="number">Number</option>' +
           '<option value="boolean">Boolean</option>' +
         '</select>' +
-<<<<<<< HEAD
-        '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()">' +
-        '<button class="json-button" ng-click="addProperty()" ng-show="newProperty.type">add property</button>' +
-=======
         '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()" ng-keydown="checkKeydown($event)">' +
->>>>>>> a3d84c402703299c6c83243e007d243f966cf020
+        '<button class="json-button" ng-click="addProperty()" ng-show="newProperty.type">add property</button>' +
         '<select name="newPropertyType" ng-model="newProperty.value" ng-show="newProperty.type === \'boolean\'">' +
           '<option value="true">true</option>' +
           '<option value="">false</option>' +
