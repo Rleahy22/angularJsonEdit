@@ -29,19 +29,20 @@
     return directive;
 
     function link(scope) {
-      scope.collapse       = collapse;
-      scope.collapsed      = [];
-      scope.deleteProperty = deleteProperty;
-      scope.expand         = expand;
-      scope.clickAction    = clickAction;
-      scope.getInputType   = getInputType;
-      scope.highlight      = highlight;
-      scope.highlighted    = [];
-      scope.isArray        = isArray;
-      scope.isCollapsed    = isCollapsed;
-      scope.isHighlighted  = isHighlighted;
-      scope.isNested       = isNested;
-      scope.unHighlight    = unHighlight;
+      scope.collapse             = collapse;
+      scope.collapsed            = [];
+      scope.deleteProperty       = deleteProperty;
+      scope.expand               = expand;
+      scope.clickAction          = clickAction;
+      scope.getInputType         = getInputType;
+      scope.highlight            = highlight;
+      scope.highlighted          = [];
+      scope.isArray              = isArray;
+      scope.isCollapsed          = isCollapsed;
+      scope.isHighlighted        = isHighlighted;
+      scope.isNested             = isNested;
+      scope.toggleExpandCollapse = toggleExpandCollapse;
+      scope.unHighlight          = unHighlight;
 
       scope.nest = '' +
         '<div class="label-wrapper" ng-class="{\'padded-row\': !isNested(value), \'json-delete-highlight\' : isHighlighted(key, parent), \'json-collapsed-row\' : !isArray(parent) && parent[key].$$collapsed}" ng-click="clickAction($event, key, parent)">' +

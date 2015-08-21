@@ -103,17 +103,10 @@ describe('jsonEditor', function() {
 
   describe('isCollapsed', function() {
     it('should return true if a key and parent are collapsed', function() {
-      isolateScope.collapse('returnTrue',
-        {
-          testObject: {
-            id: 2
-          }
-        }
-      );
-
-      var result = isolateScope.isCollapsed('returnTrue', {
+      var result = isolateScope.isCollapsed('testObject', {
         testObject: {
-          id: 2
+          id: 2,
+          $$collapsed: true
         }
       });
 
@@ -121,21 +114,13 @@ describe('jsonEditor', function() {
     });
 
     it('should return false if a key and parent are not collapsed', function() {
-      isolateScope.collapse('returnTrue',
-        {
-          testObject: {
-            id: 2
-          }
-        }
-      );
-
-      var result = isolateScope.isCollapsed('returnTrue', {
+      var result = isolateScope.isCollapsed('testObject', {
         testObject: {
           id: 3
         }
       });
 
-      expect(result).toEqual(false);
+      expect(result).toBeFalsy();
     });
   });
 
