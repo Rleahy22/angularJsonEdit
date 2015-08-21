@@ -66,6 +66,15 @@ describe('jsonEditorAddProperty', function() {
         expect(isolateScope.object.newNumber).toEqual(0);
       });
 
+      it('should add an boolean to the scope object when new type is boolean', function() {
+        isolateScope.newProperty = {
+          type: 'boolean',
+          name: 'newBoolean'
+        };
+        isolateScope.addProperty();
+        expect(typeof isolateScope.object.newBoolean).toEqual('boolean');
+      });
+
       describe('getInputType', function() {
         it('should return "text" for a string', function() {
           isolateScope.newProperty = {
@@ -133,6 +142,79 @@ describe('jsonEditorAddProperty', function() {
         };
         isolateScope.addProperty();
         expect(isolateScope.object[2]).toEqual(0);
+      });
+
+      it('should push a boolean onto the scope object when new type is boolean', function() {
+        isolateScope.newProperty = {
+          type: 'boolean',
+          name: 'newNumber'
+        };
+        isolateScope.addProperty();
+        expect(typeof isolateScope.object[2]).toEqual('boolean');
+      });
+    });
+  });
+
+  describe('other functions', function() {
+    beforeEach(function() {
+      bard.appModule('angular-json-edit');
+
+      bard.inject(function($window, $rootScope, $compile) {
+        testScope = $rootScope;
+        elm = angular.element('<json-editor-add-property object="newConfig" newProperty="{}">');
+
+        testScope.newConfig = angular.copy(testArray);
+
+        $compile(elm)(testScope);
+        testScope.$digest();
+        isolateScope = elm.isolateScope();
+      });
+    });
+
+    describe('checkKeydown', function() {
+      it('should call addProperty if enter pressed', function() {
+        var testEvent = {
+          keyCode: 13
+        };
+        isolateScope.addProperty = sinon.spy();
+
+        isolateScope.checkKeydown(testEvent);
+
+        expect(isolateScope.addProperty.calledOnce).toEqual(true);
+      });
+    });
+
+    describe('showValueField', function() {
+      it('should return true for strings', function() {
+        isolateScope.newProperty = {
+          type: 'string'
+        };
+        var testResult = isolateScope.showValueField();
+        expect(testResult).toEqual(true);
+      });
+
+      it('should return true for numbers', function() {
+        isolateScope.newProperty = {
+          type: 'number'
+        };
+        var testResult = isolateScope.showValueField();
+        expect(testResult).toEqual(true);
+      });
+
+      it('should return false for objects', function() {
+        isolateScope.newProperty = {
+          type: 'object'
+        };
+        var testResult = isolateScope.showValueField();
+        expect(testResult).toEqual(false);
+      });
+
+      it('should return false for arrays', function() {
+        isolateScope.newProperty = {
+          type: 'array'
+        };
+        var testResult = isolateScope.showValueField();
+        expect(testResult).toEqual(false);
       });
     });
   });
