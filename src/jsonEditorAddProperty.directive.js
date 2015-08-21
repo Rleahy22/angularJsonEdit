@@ -16,11 +16,11 @@
           '<option value="boolean">Boolean</option>' +
         '</select>' +
         '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()" ng-keydown="checkKeydown($event)">' +
-        '<button class="json-button" ng-click="addProperty()" ng-show="newProperty.type">add property</button>' +
         '<select name="newPropertyType" ng-model="newProperty.value" ng-show="newProperty.type === \'boolean\'">' +
           '<option value="true">true</option>' +
           '<option value="">false</option>' +
         '</select>' +
+        '<button class="json-button" ng-click="addProperty()" ng-show="newProperty.type">add property</button>' +
       '</div>' +
     '<div class="new-property-button-div" ng-show="!showForm">' +
       '<button class="json-button padded-row" ng-click="showForm = true">+ add property</button>' +
