@@ -15,7 +15,7 @@
           '<option value="number">Number</option>' +
           '<option value="boolean">Boolean</option>' +
         '</select>' +
-        '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()">' +
+        '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()" ng-keydown="checkKeydown($event)">' +
         '<button class="json-button" ng-click="addProperty()" ng-show="newProperty.type">add property</button>' +
         '<select name="newPropertyType" ng-model="newProperty.value" ng-show="newProperty.type === \'boolean\'">' +
           '<option value="true">true</option>' +
@@ -40,6 +40,7 @@
 
     function link(scope) {
       scope.addProperty    = addProperty;
+      scope.checkKeydown   = checkKeydown;
       scope.getInputType   = getInputType;
       scope.isParentArray  = isParentArray;
       scope.showValueField = showValueField;
@@ -85,6 +86,13 @@
 
         scope.newProperty = {};
         scope.showForm = false;
+      }
+
+      function checkKeydown(event) {
+        var key = event.keyCode || event.which;
+        if (key === 13) {
+          scope.addProperty();
+        }
       }
 
       function getInputType() {
