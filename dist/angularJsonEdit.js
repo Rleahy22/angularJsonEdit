@@ -35,11 +35,9 @@
     return directive;
 
     function link(scope) {
-      scope.collapse             = collapse;
+      scope.clickAction          = clickAction;
       scope.collapsed            = [];
       scope.deleteProperty       = deleteProperty;
-      scope.expand               = expand;
-      scope.clickAction          = clickAction;
       scope.getInputType         = getInputType;
       scope.highlight            = highlight;
       scope.highlighted          = [];
@@ -75,10 +73,13 @@
         '</div>' +
         '<label ng-show="isNested(value) && !isCollapsed(key, parent)" class="json-closing-brace label-wrapper padded-row">{{isArray(value) ? \']\' : \'}\'}}</label>';
 
-      function collapse(key, parent) {
-        var newObj = {};
-        newObj[key] = parent;
-        scope.collapsed.push(newObj);
+      function clickAction($event, key, parent) {
+        if(isArray(parent) || typeof parent[key] != "object") {
+          focusInput($event, key, parent);
+        } else {
+          console.log(key, parent);
+          toggleExpandCollapse(key, parent);
+        }
       }
 
       function deleteProperty(key, object) {
@@ -86,26 +87,6 @@
           object.splice(key, 1);
         } else {
           delete object[key];
-        }
-      }
-
-      function expand(key, parent) {
-        var check = {};
-        check[key] = parent;
-
-        scope.collapsed.forEach(function(element, index) {
-          if (angular.equals(element[key], check[key])) {
-            scope.collapsed.splice(index, 1);
-          }
-        });
-      }
-
-      function clickAction($event, key, parent) {
-        if(isArray(parent) || typeof parent[key] != "object") {
-          focusInput($event, key, parent);
-        } else {
-          console.log(key, parent);
-          toggleExpandCollapse(key, parent);
         }
       }
 
@@ -119,19 +100,6 @@
 
         if(target.tagName == "INPUT") {
           target.focus();
-        }
-      }
-
-      function toggleExpandCollapse(key, parent) {
-        console.log(key, parent, typeof parent[key]);
-        if(typeof parent[key].$$collapsed == "undefined") {
-          Object.defineProperty(parent[key], "$$collapsed", {
-            value: true,
-            writable: true,
-            enumerable: false
-          });
-        } else {
-          parent[key].$$collapsed = !parent[key].$$collapsed;
         }
       }
 
@@ -156,19 +124,6 @@
       function isCollapsed(key, parent) {
         return parent[key].$$collapsed;
       }
-      // function isCollapsed(key, parent) {
-      //   var check = {};
-      //   var result = false;
-      //   check[key] = parent;
-
-      //   scope.collapsed.forEach(function(element) {
-      //     if (angular.equals(element[key], check[key])) {
-      //       result = true;
-      //     }
-      //   });
-
-      //   return result;
-      // }
 
       function isHighlighted(key, parent) {
         var check = {};
@@ -190,6 +145,20 @@
         } else {
           return false;
         }
+      }
+
+      function toggleExpandCollapse(key, parent) {
+        console.log(key, parent, typeof parent[key]);
+        if(typeof parent[key].$$collapsed == "undefined") {
+          Object.defineProperty(parent[key], "$$collapsed", {
+            value: true,
+            writable: true,
+            enumerable: false
+          });
+        } else {
+          parent[key].$$collapsed = !parent[key].$$collapsed;
+        }
+        console.log(angular.merge({}, scope.config));
       }
 
       function unHighlight(key, parent) {
