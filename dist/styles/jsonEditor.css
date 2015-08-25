@@ -29,6 +29,7 @@
 .json-container .json-form-div .json-delete {
   height: 100%;
   width: 30px;
+  line-height: 30px;
 }
 .json-container .json-form-div .value-field {
   margin-left: 5px;
@@ -49,22 +50,30 @@
   justify-content: space-between;
   align-items: center;
 }
-.json-container .json-form-div .json-form .label-wrapper:hover {
+.json-container .json-form-div .json-form .label-wrapper:not(.padded-row) * {
   cursor: pointer;
+}
+.json-container .json-form-div .json-form .label-wrapper:not(.padded-row) .json-arrow {
+  content: " ";
+  margin-right: 5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000;
+}
+.json-container .json-form-div .json-form .label-wrapper:not(.padded-row) .json-form-element {
+  display: flex;
+  align-items: center;
+}
+.json-container .json-form-div .json-form .label-wrapper:not(.padded-row).json-collapsed-row .json-arrow {
+  transform: rotate(-90deg);
+}
+.json-container .json-form-div .json-form .label-wrapper:hover {
   background-color: #DDD;
 }
 .json-container .json-form-div .json-form .label-wrapper.json-collapsed-row + .nested-json {
   display: none;
-}
-.json-container .json-form-div .json-form .label-wrapper .json-arrow:hover {
-  cursor: pointer;
-}
-.json-container .json-form-div .json-form .label-wrapper .expanded {
-  -ms-transform: rotate(90deg);
-  /* IE 9 */
-  -webkit-transform: rotate(90deg);
-  /* Chrome, Safari, Opera */
-  transform: rotate(90deg);
 }
 .json-container .json-form-div .json-form .label-wrapper .key-span {
   font-weight: 600;

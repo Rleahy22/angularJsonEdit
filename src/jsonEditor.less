@@ -33,6 +33,7 @@
     .json-delete {
       height: 100%;
       width: 30px;
+      line-height: 30px;
     }
 
     .value-field {
@@ -56,8 +57,33 @@
         justify-content: space-between;
         align-items: center;
 
+        &:not(.padded-row) {
+          * {
+            cursor: pointer;
+          }
+          .json-arrow {
+            content: " ";
+            margin-right: 5px;
+            width: 0; 
+            height: 0; 
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #000;
+          }
+
+          .json-form-element {
+            display: flex;
+            align-items: center;
+          }
+
+          &.json-collapsed-row {
+            .json-arrow {
+              transform: rotate(-90deg);
+            }
+          }
+        }
+
         &:hover {
-          cursor: pointer;
           background-color: #DDD;
         }
 
@@ -65,18 +91,6 @@
           & + .nested-json {
             display: none;
           }
-        }
-        .json-arrow {
-
-          &:hover {
-            cursor: pointer;
-          }
-        }
-
-        .expanded {
-          -ms-transform: rotate(90deg); /* IE 9 */
-          -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-          transform: rotate(90deg);
         }
 
         .key-span {
