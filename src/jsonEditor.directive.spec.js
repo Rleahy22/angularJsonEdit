@@ -39,6 +39,48 @@ describe('jsonEditor', function() {
     });
   });
 
+  describe('blurInput', function() {
+    it('should call blur on enter', function() {
+      var keycodeEvent = {
+        keycode: 13,
+        target: {
+          blur: sinon.spy()
+        }
+      };
+      var whichEvent = {
+        which: 13,
+        srcElement: {
+          blur: sinon.spy()
+        }
+      };
+
+      isolateScope.blurInput(keycodeEvent);
+      expect(keycodeEvent.target.blur.calledOnce).toEqual(true);
+      isolateScope.blurInput(whichEvent);
+      expect(whichEvent.srcElement.blur.calledOnce).toEqual(true);
+    });
+
+    it('should call do nothing on other keys', function() {
+      var keycodeEvent = {
+        keycode: 86,
+        target: {
+          blur: sinon.spy()
+        }
+      };
+      var whichEvent = {
+        which: 33,
+        srcElement: {
+          blur: sinon.spy()
+        }
+      };
+
+      isolateScope.blurInput(keycodeEvent);
+      expect(keycodeEvent.target.blur.calledOnce).toEqual(false);
+      isolateScope.blurInput(whichEvent);
+      expect(whichEvent.srcElement.blur.calledOnce).toEqual(false);
+    });
+  });
+
   describe('clickAction', function() {
     it('should call focusInput on non objects/arrays', function() {
       isolateScope.focusInput = sinon.spy();
@@ -226,6 +268,10 @@ describe('jsonEditor', function() {
 
     it('should return "number" for a number', function() {
       expect(isolateScope.getInputType(42)).toEqual('number');
+    });
+
+    it('should return "boolean" for a booleam', function() {
+      expect(isolateScope.getInputType(true)).toEqual('boolean');
     });
   });
 

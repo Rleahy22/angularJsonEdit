@@ -29,6 +29,7 @@
     return directive;
 
     function link(scope) {
+      scope.blurInput            = blurInput;
       scope.clickAction          = clickAction;
       scope.collapsed            = [];
       scope.deleteProperty       = deleteProperty;
@@ -60,7 +61,9 @@
               '{{isNested(value) && !isArray(value) && isCollapsed(key, parent) ? " ... }" : "" }}' +
             '</span>' +
             '<div ng-if="!isNested(value)" class="json-input-div">' +
-              '<input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="json-input" required>' +
+              '<input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="json-input" ng-keydown="blurInput($event)" ng-hide="getInputType(value) === \'boolean\'"">' +
+              '<select name="{{key}}" class="" ng-model="parent[key]" ng-options="bool for bool in [true, false]" ng-show="getInputType(value) === \'boolean\'">' +
+              '</select>' +
             '</div>' +
           '</label>' +
           '<button class="json-delete json-button" type="button" ng-click="deleteProperty(key, parent)" ng-mouseover="highlight(key, parent)"  ng-mouseleave="unHighlight(key, parent)">&times;</button>' +
@@ -72,6 +75,15 @@
           '</div>' +
         '</div>' +
         '<label ng-show="isNested(value) && !isCollapsed(key, parent)" class="json-closing-brace label-wrapper padded-row">{{isArray(value) ? \']\' : \'}\'}}</label>';
+
+      function blurInput($event) {
+        var key = $event.keycode || $event.which;
+
+        if (key === 13) {
+          var target = $event.target || $event.srcElement;
+          target.blur();
+        }
+      }
 
       function clickAction($event, key, parent) {
         if (isArray(parent) || typeof parent[key] != 'object') {
@@ -103,10 +115,10 @@
       }
 
       function getInputType(value) {
-        if (typeof value === 'number') {
-          return 'number';
-        } else {
+        if (typeof value === 'string') {
           return 'text';
+        } else {
+          return typeof value;
         }
       }
 
