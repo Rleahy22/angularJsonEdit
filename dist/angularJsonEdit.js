@@ -51,15 +51,19 @@
 
       scope.nest = '' +
         '<div class="label-wrapper" ng-class="{\'padded-row\': !isNested(value), \'json-delete-highlight\' : isHighlighted(key, parent), \'json-collapsed-row\' : !isArray(parent) && parent[key].$$collapsed}" ng-click="clickAction($event, key, parent)">' +
-          // '<span ng-show="isNested(value) && isCollapsed(key, parent)" class="json-arrow" ng-click="expand(key, parent)">&#8658;</span>' +
-          // '<span ng-show="isNested(value) && !isCollapsed(key, parent)" class="json-arrow" ng-click="collapse(key, parent)">&#8659;</span>' +
           '<label class="json-form-element">' +
             '<span class="json-arrow"></span>' +
             '<span class="key-span" ng-click="to(key, parent)" ng-if="!isArray(parent)">{{key}}: ' +
-            '{{isNested(value) && isArray(value) ? "[" : "" }}' +
-            '{{isNested(value) && !isArray(value) ? "{" : "" }}' +
-            '{{isNested(value) && isArray(value) && isCollapsed(key, parent) ? " ... ]" : "" }}' +
-            '{{isNested(value) && !isArray(value) && isCollapsed(key, parent) ? " ... }" : "" }}' +
+              '{{isNested(value) && isArray(value) ? "[" : "" }}' +
+              '{{isNested(value) && !isArray(value) ? "{" : "" }}' +
+              '{{isNested(value) && isArray(value) && isCollapsed(key, parent) ? " ... ]" : "" }}' +
+              '{{isNested(value) && !isArray(value) && isCollapsed(key, parent) ? " ... }" : "" }}' +
+            '</span>' +
+            '<span class="key-span" ng-click="to(key, parent)" ng-if="isArray(parent)">' +
+              '{{isNested(value) && isArray(value) ? "[" : "" }}' +
+              '{{isNested(value) && !isArray(value) ? "{" : "" }}' +
+              '{{isNested(value) && isArray(value) && isCollapsed(key, parent) ? " ... ]" : "" }}' +
+              '{{isNested(value) && !isArray(value) && isCollapsed(key, parent) ? " ... }" : "" }}' +
             '</span>' +
             '<div ng-if="!isNested(value)" class="json-input-div">' +
               '<input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="json-input" required>' +
@@ -200,8 +204,8 @@
 
   function jsonEditorAddProperty() {
     var template = '<div class="new-property-div padded-row" ng-show="showForm">' +
-      '<input type="text" placeholder="key" name="newPropertyName" ng-model="newProperty.name" ng-show="!isParentArray()">' +
-        '<select name="newPropertyType" ng-model="newProperty.type">' +
+      '<input type="text" placeholder="key" name="newPropertyName" class="json-add-input" ng-model="newProperty.name" ng-show="!isParentArray()">' +
+        '<select name="newPropertyType" class="json-add-input" ng-model="newProperty.type">' +
           '<option value="" ng-disabled="true">Type</option>' +
           '<option value="array">Array</option>' +
           '<option value="object">Object</option>' +
@@ -209,8 +213,8 @@
           '<option value="number">Number</option>' +
           '<option value="boolean">Boolean</option>' +
         '</select>' +
-        '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()" ng-keydown="checkKeydown($event)">' +
-        '<select name="newPropertyType" ng-model="newProperty.value" ng-show="newProperty.type === \'boolean\'">' +
+        '<input type="{{getInputType()}}" class="value-field json-add-input" " placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()" ng-keydown="checkKeydown($event)">' +
+        '<select name="newPropertyType" class="json-add-input" ng-model="newProperty.value" ng-show="newProperty.type === \'boolean\'">' +
           '<option value="true">true</option>' +
           '<option value="">false</option>' +
         '</select>' +

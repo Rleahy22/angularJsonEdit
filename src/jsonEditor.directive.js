@@ -45,15 +45,19 @@
 
       scope.nest = '' +
         '<div class="label-wrapper" ng-class="{\'padded-row\': !isNested(value), \'json-delete-highlight\' : isHighlighted(key, parent), \'json-collapsed-row\' : !isArray(parent) && parent[key].$$collapsed}" ng-click="clickAction($event, key, parent)">' +
-          // '<span ng-show="isNested(value) && isCollapsed(key, parent)" class="json-arrow" ng-click="expand(key, parent)">&#8658;</span>' +
-          // '<span ng-show="isNested(value) && !isCollapsed(key, parent)" class="json-arrow" ng-click="collapse(key, parent)">&#8659;</span>' +
           '<label class="json-form-element">' +
             '<span class="json-arrow"></span>' +
             '<span class="key-span" ng-click="to(key, parent)" ng-if="!isArray(parent)">{{key}}: ' +
-            '{{isNested(value) && isArray(value) ? "[" : "" }}' +
-            '{{isNested(value) && !isArray(value) ? "{" : "" }}' +
-            '{{isNested(value) && isArray(value) && isCollapsed(key, parent) ? " ... ]" : "" }}' +
-            '{{isNested(value) && !isArray(value) && isCollapsed(key, parent) ? " ... }" : "" }}' +
+              '{{isNested(value) && isArray(value) ? "[" : "" }}' +
+              '{{isNested(value) && !isArray(value) ? "{" : "" }}' +
+              '{{isNested(value) && isArray(value) && isCollapsed(key, parent) ? " ... ]" : "" }}' +
+              '{{isNested(value) && !isArray(value) && isCollapsed(key, parent) ? " ... }" : "" }}' +
+            '</span>' +
+            '<span class="key-span" ng-click="to(key, parent)" ng-if="isArray(parent)">' +
+              '{{isNested(value) && isArray(value) ? "[" : "" }}' +
+              '{{isNested(value) && !isArray(value) ? "{" : "" }}' +
+              '{{isNested(value) && isArray(value) && isCollapsed(key, parent) ? " ... ]" : "" }}' +
+              '{{isNested(value) && !isArray(value) && isCollapsed(key, parent) ? " ... }" : "" }}' +
             '</span>' +
             '<div ng-if="!isNested(value)" class="json-input-div">' +
               '<input type="{{getInputType(value)}}" name="{{key}}" ng-model="parent[key]" class="json-input" required>' +

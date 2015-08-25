@@ -6,8 +6,8 @@
 
   function jsonEditorAddProperty() {
     var template = '<div class="new-property-div padded-row" ng-show="showForm">' +
-      '<input type="text" placeholder="key" name="newPropertyName" ng-model="newProperty.name" ng-show="!isParentArray()">' +
-        '<select name="newPropertyType" ng-model="newProperty.type">' +
+      '<input type="text" placeholder="key" name="newPropertyName" class="json-add-input" ng-model="newProperty.name" ng-show="!isParentArray()">' +
+        '<select name="newPropertyType" class="json-add-input" ng-model="newProperty.type">' +
           '<option value="" ng-disabled="true">Type</option>' +
           '<option value="array">Array</option>' +
           '<option value="object">Object</option>' +
@@ -15,8 +15,8 @@
           '<option value="number">Number</option>' +
           '<option value="boolean">Boolean</option>' +
         '</select>' +
-        '<input type="{{getInputType()}}" class="value-field" placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()" ng-keydown="checkKeydown($event)">' +
-        '<select name="newPropertyType" ng-model="newProperty.value" ng-show="newProperty.type === \'boolean\'">' +
+        '<input type="{{getInputType()}}" class="value-field json-add-input" " placeholder="value" name="newPropertyValue" ng-model="newProperty.value" ng-show="showValueField()" ng-keydown="checkKeydown($event)">' +
+        '<select name="newPropertyType" class="json-add-input" ng-model="newProperty.value" ng-show="newProperty.type === \'boolean\'">' +
           '<option value="true">true</option>' +
           '<option value="">false</option>' +
         '</select>' +

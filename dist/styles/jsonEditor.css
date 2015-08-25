@@ -82,6 +82,9 @@
   cursor: default;
   background-color: inherit;
 }
+.json-container .json-form-div .json-form .json-closing-brace {
+  font-weight: 600;
+}
 .json-container .json-form-div .json-form .json-form-element {
   display: inline-block;
 }
@@ -101,6 +104,9 @@
 }
 .json-container .json-form-div .json-form .nested-json {
   min-height: 20px;
+}
+.json-container .json-form-div .json-form .nested-json .json-add-input {
+  margin-right: 4px;
 }
 .json-container .json-form-div .json-brackets {
   display: block;
