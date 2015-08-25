@@ -77,7 +77,6 @@
         if(isArray(parent) || typeof parent[key] != "object") {
           focusInput($event, key, parent);
         } else {
-          console.log(key, parent);
           toggleExpandCollapse(key, parent);
         }
       }
@@ -148,7 +147,6 @@
       }
 
       function toggleExpandCollapse(key, parent) {
-        console.log(key, parent, typeof parent[key]);
         if(typeof parent[key].$$collapsed == "undefined") {
           Object.defineProperty(parent[key], "$$collapsed", {
             value: true,
@@ -158,7 +156,6 @@
         } else {
           parent[key].$$collapsed = !parent[key].$$collapsed;
         }
-        console.log(angular.merge({}, scope.config));
       }
 
       function unHighlight(key, parent) {
