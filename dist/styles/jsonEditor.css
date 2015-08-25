@@ -38,6 +38,9 @@
   width: 100%;
   padding: 5px;
 }
+.json-container .json-form-div .json-form input {
+  text-overflow: ellipsis;
+}
 .json-container .json-form-div .json-form .padded-row {
   margin-left: 12px;
 }
@@ -76,6 +79,7 @@
   display: none;
 }
 .json-container .json-form-div .json-form .label-wrapper .key-span {
+  max-width: 30%;
   font-weight: 600;
 }
 .json-container .json-form-div .json-form .label-wrapper.json-closing-brace:hover {
@@ -87,12 +91,15 @@
 }
 .json-container .json-form-div .json-form .json-form-element {
   display: inline-block;
+  width: 100%;
 }
 .json-container .json-form-div .json-form .json-input-div {
   display: inline-block;
+  width: 70%;
 }
 .json-container .json-form-div .json-form .json-input-div .json-input {
   height: 25px;
+  width: 100%;
   padding-top: 0;
   padding-bottom: 0;
   background: transparent;
