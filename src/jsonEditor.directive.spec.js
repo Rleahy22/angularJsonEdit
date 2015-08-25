@@ -39,12 +39,73 @@ describe('jsonEditor', function() {
     });
   });
 
-  describe('collapse', function() {
-    it('should add a key and it\'s parent to scope.collapsed', function() {
-      expect(isolateScope.collapsed.length).toEqual(0);
-      isolateScope.collapse('test', {id: 1});
-      expect(isolateScope.collapsed.length).toEqual(1);
-      expect(isolateScope.collapsed[0]).toEqual({test: {id: 1}});
+  describe('clickAction', function() {
+    it('should call focusInput on non objects/arrays', function() {
+      isolateScope.focusInput = sinon.spy();
+      var testEvent = {
+        type: 'test'
+      };
+      var testParent = {
+        this: 'string'
+      };
+
+      isolateScope.clickAction(testEvent, 'this', testParent);
+      expect(isolateScope.focusInput.calledWith(testEvent)).toEqual(true);
+    });
+
+    it('should call toggleExpandCollapse on objects or arrays', function() {
+      isolateScope.toggleExpandCollapse = sinon.spy();
+      var testParent = {
+        this: [
+          'string'
+        ]
+      };
+
+      isolateScope.clickAction(null, 'this', testParent);
+      expect(isolateScope.toggleExpandCollapse.calledWith('this')).toEqual(true);
+    });
+  });
+
+  describe('focusInput', function() {
+    it('should call focus on an input if provided', function() {
+      var testEvent = {
+        target: {
+          children: [],
+          dispatchEvent: sinon.spy(),
+          focus: sinon.spy(),
+          tagName: 'INPUT'
+        }
+      };
+      var testParent = {
+        this: 'string'
+      };
+
+      isolateScope.focusInput(testEvent, 'this', testParent);
+      expect(testEvent.target.focus.calledOnce).toEqual(true);
+    });
+
+    it('should call focusInput on target\'s children if not an input', function() {
+      var testEvent = {
+        target: {
+          dispatchEvent: sinon.spy(),
+          children: [
+            {
+              children: [],
+              dispatchEvent: sinon.spy(),
+              focus: sinon.spy(),
+              tagName: 'INPUT'
+            }
+          ],
+          focus: sinon.spy(),
+          tagName: 'DIV'
+        }
+      };
+      var testParent = {
+        this: 'string'
+      };
+
+      isolateScope.focusInput(testEvent, 'this', testParent);
+      expect(testEvent.target.children[0].focus.calledOnce).toEqual(true);
     });
   });
 
@@ -85,35 +146,12 @@ describe('jsonEditor', function() {
     });
   });
 
-  describe('expand', function() {
-    it('should remove a key and parent from scope.collapsed', function() {
-      isolateScope.collapsed = [
-        {
-          testObject: {
-            id: 2
-          }
-        }
-      ];
-
-      expect(isolateScope.collapsed.length).toEqual(1);
-      isolateScope.expand({testObject: {id: 2}});
-      expect(isolateScope.collapsed.length).toEqual(0);
-    });
-  });
-
   describe('isCollapsed', function() {
     it('should return true if a key and parent are collapsed', function() {
-      isolateScope.collapse('returnTrue',
-        {
-          testObject: {
-            id: 2
-          }
-        }
-      );
-
-      var result = isolateScope.isCollapsed('returnTrue', {
+      var result = isolateScope.isCollapsed('testObject', {
         testObject: {
-          id: 2
+          id: 2,
+          $$collapsed: true
         }
       });
 
@@ -121,21 +159,13 @@ describe('jsonEditor', function() {
     });
 
     it('should return false if a key and parent are not collapsed', function() {
-      isolateScope.collapse('returnTrue',
-        {
-          testObject: {
-            id: 2
-          }
-        }
-      );
-
-      var result = isolateScope.isCollapsed('returnTrue', {
+      var result = isolateScope.isCollapsed('testObject', {
         testObject: {
           id: 3
         }
       });
 
-      expect(result).toEqual(false);
+      expect(result).toBeFalsy();
     });
   });
 
@@ -196,6 +226,32 @@ describe('jsonEditor', function() {
 
     it('should return "number" for a number', function() {
       expect(isolateScope.getInputType(42)).toEqual('number');
+    });
+  });
+
+  describe('toggleExpandCollapse', function() {
+    it('should add $$collapsed property to expanded parent', function() {
+      var testParent = {
+        test: [
+          'this'
+        ]
+      };
+
+      isolateScope.toggleExpandCollapse('test', testParent);
+      expect(testParent.test.$$collapsed).toEqual(true);
+    });
+
+    it('should toggle $$collapsed property to collapsed parent', function() {
+      var testParent = {
+        test: [
+          'this'
+        ]
+      };
+
+      isolateScope.toggleExpandCollapse('test', testParent);
+      expect(testParent.test.$$collapsed).toEqual(true);
+      isolateScope.toggleExpandCollapse('test', testParent);
+      expect(testParent.test.$$collapsed).toEqual(false);
     });
   });
 
