@@ -38,6 +38,7 @@
       scope.clickAction          = clickAction;
       scope.collapsed            = [];
       scope.deleteProperty       = deleteProperty;
+      scope.focusInput           = focusInput;
       scope.getInputType         = getInputType;
       scope.highlight            = highlight;
       scope.highlighted          = [];
@@ -74,10 +75,10 @@
         '<label ng-show="isNested(value) && !isCollapsed(key, parent)" class="json-closing-brace label-wrapper padded-row">{{isArray(value) ? \']\' : \'}\'}}</label>';
 
       function clickAction($event, key, parent) {
-        if(isArray(parent) || typeof parent[key] != "object") {
-          focusInput($event, key, parent);
+        if (isArray(parent) || typeof parent[key] != 'object') {
+          scope.focusInput($event, key, parent);
         } else {
-          toggleExpandCollapse(key, parent);
+          scope.toggleExpandCollapse(key, parent);
         }
       }
 
@@ -91,13 +92,13 @@
 
       function focusInput($event, key, parent) {
         var target = $event.target || $event.srcElement;
-        if (target.tagName != "INPUT" && target.children.length > 0) {
-          for(var i = 0; i < target.children.length; i++) {
-            focusInput({target: target.children[i]}, key, parent);
+        if (target.tagName != 'INPUT' && target.children.length > 0) {
+          for (var i = 0; i < target.children.length; i++) {
+            scope.focusInput({target: target.children[i]}, key, parent);
           }
         }
 
-        if(target.tagName == "INPUT") {
+        if (target.tagName == 'INPUT') {
           target.focus();
         }
       }
@@ -147,8 +148,8 @@
       }
 
       function toggleExpandCollapse(key, parent) {
-        if(typeof parent[key].$$collapsed == "undefined") {
-          Object.defineProperty(parent[key], "$$collapsed", {
+        if (typeof parent[key].$$collapsed == 'undefined') {
+          Object.defineProperty(parent[key], '$$collapsed', {
             value: true,
             writable: true,
             enumerable: false

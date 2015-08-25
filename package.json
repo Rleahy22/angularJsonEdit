@@ -1,6 +1,6 @@
 {
   "name": "angular-json-edit",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Infinitely nesting JSON editor for Angular with no dependencies",
   "main": "dist/angularJsonEdit.js",
   "scripts": {
